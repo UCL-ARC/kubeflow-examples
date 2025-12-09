@@ -1,0 +1,9 @@
+# ignore python virtual environments
+.venv
+
+# ignore the built site
+/site**
+
+# temporal files
+*.swp
+.DS_Store
