@@ -1,4 +1,4 @@
-site_name: Kubeflow Trainer Examples for Unified-AI
+site_name: Kubeflow Trainer Examples in Unified-AI
 theme:
   name: material
   logo: assets/images/kubeflow-trainer-logo.svg
@@ -23,7 +23,7 @@ theme:
 not_in_nav: |
   /stubs
 copyright: "UCL Advanced Research Computing, 2026"
-site_description: "Kubeflow Trainer Examples for Unified-AI"
+site_description: "Kubeflow Trainer Examples in Unified-AI"
 repo_url: https://github.com/ucl-arc-environments/kubeflow-trainer-examples
 edit_uri: edit/main/docs/
 site_url: https://kubeflow-trainer-examples.arc-unified-ai.condenser.arc.ucl.ac.uk/docs
