@@ -1,6 +1,8 @@
-# Install kubeflow and run script
+# Install dependencies and run script
 # pip install kubeflow
-# python3 trainer-quickstart.py
+# pip install torch
+# pip install torchvision
+# python quickstart.py
 
 import os
 import torch
@@ -21,7 +23,7 @@ def get_torch_dist():
     print(f"LOCAL_RANK: {os.environ['LOCAL_RANK']}")
     dist.destroy_process_group()
 
- job_id = trainer.train(
+job_id = trainer.train(
     runtime=trainer.get_runtime("torch-distributed"),
     trainer=kubeflow.trainer.CustomTrainer(
         func=get_torch_dist,
