@@ -1,9 +1,8 @@
 # Hello world examples
 
-Create unified AI notebook with the following resources:
+Follow [documentation](https://kubeflow.arc-unified-ai.condenser.arc.ucl.ac.uk/docs/kubeflow_notebooks/) to create notebook that mainly have these resources:
 * CPU: 2
 * RAM: 4Gb
-* GPUs: 1 (A100 80GB)
+* GPUs: 2 (A100 80GB)
 * Workspace Volume of 20Gb
-
 
