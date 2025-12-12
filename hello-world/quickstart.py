@@ -1,7 +1,5 @@
 # Install dependencies and run script
-# pip install kubeflow
-# pip install torch
-# pip install torchvision
+# pip install kubeflow torch torchvision
 # python quickstart.py
 
 import kubeflow.trainer
