@@ -12,7 +12,7 @@ trainer = kubeflow.trainer.TrainerClient(backend_config=config)
 # Set your distributed environment configuration here
 NUM_NODES = 5
 RESOURCES_PER_NODE = {
-    "nvidia.com/gpu": 1  # Adjust GPU type/quantity as needed
+    "nvidia.com/gpu": 2  # Adjust GPU type/quantity as needed
 }
 # Other possible resources:
 # RESOURCES_PER_NODE = {

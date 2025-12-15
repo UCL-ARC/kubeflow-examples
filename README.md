@@ -20,6 +20,11 @@ Pre-commit hooks for end-of-file-fixer, mixed-line-ending, trailing-whitespace a
 uv run pre-commit run -a
 ```
 
+## Launch Jupyter locally
+```sh
+uv run jupyter notebook
+```
+
 ## Clone repository
 You need to [authorize a personal access token for use with single sign-on](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-single-sign-on/authorizing-a-personal-access-token-for-use-with-single-sign-on)
 ```sh
