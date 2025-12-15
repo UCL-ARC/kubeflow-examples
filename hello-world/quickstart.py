@@ -22,6 +22,7 @@ RESOURCES_PER_NODE = {
 # }
 # =======================================================
 
+
 def get_torch_dist():
     import os
     import torch
@@ -36,13 +37,14 @@ def get_torch_dist():
     print(f"LOCAL_RANK: {os.environ['LOCAL_RANK']}")
     dist.destroy_process_group()
 
+
 job_id = trainer.train(
     runtime=trainer.get_runtime("torch-distributed"),
     trainer=kubeflow.trainer.CustomTrainer(
         func=get_torch_dist,
         num_nodes=NUM_NODES,
         resources_per_node=RESOURCES_PER_NODE,
-        ),
+    ),
 )
 
 while True:

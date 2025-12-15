@@ -8,5 +8,7 @@ Follow [documentation](https://kubeflow.arc-unified-ai.condenser.arc.ucl.ac.uk/d
 * Workspace Volume of 20Gb
 
 ## Examples
+You can then run examples using terminal for python scripts and jupyter notebook for such notebooks.
+
 * [quickstart.py](quickstart.py)
 * [mnist.ipynb](mnist.ipynb)
