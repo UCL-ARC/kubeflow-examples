@@ -7,3 +7,4 @@
 # temporal files
 *.swp
 .DS_Store
+.ipynb_checkpoints/
