@@ -11,10 +11,7 @@ job_id = trainer.train(
     trainer=kubeflow.trainer.CustomTrainerContainer(
         image="ghcr.io/my-org/my-image:v1.0.0",
     ),
-    runtime=runtime
-    options = [
-        command
-    ]
+    options=[command],
 )
 
 

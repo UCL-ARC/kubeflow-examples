@@ -47,7 +47,7 @@ GITHUB_ORG=YOUR_GITHUB_ORG or YOUR_GITHUB_USERNAME_ID
 PROJECT_NAME=YOUR_PROJECT_NAME
 docker tag ${IMAGENAME}:${VERSION_ID} ghcr.io/${GITHUB_ORG}/${PROJECT_NAME}/${IMAGENAME}:${VERSION_ID}
 ```
-Pushing container images
+Pushing container images to GitHub container registry
 ```bash
 docker push ghcr.io/${GITHUB_ORG}/${PROJECT_NAME}/${IMAGENAME}:${VERSION_ID}
 ```
