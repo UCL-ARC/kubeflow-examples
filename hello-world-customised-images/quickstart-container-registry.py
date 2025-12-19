@@ -3,13 +3,15 @@ import time
 
 config = kubeflow.trainer.KubernetesBackendConfig()
 trainer = kubeflow.trainer.TrainerClient(backend_config=config)
-
+github_container_registry = (
+    "ghcr.io/mxochicale/kubeflowtrainer/kubeflowtrainerimage:v0.0.1"
+)
 
 command = kubeflow.trainer.options.TrainerCommand(command=["./my-entrypoint.sh"])
 job_id = trainer.train(
     runtime=trainer.get_runtime("torch-distributed"),
     trainer=kubeflow.trainer.CustomTrainerContainer(
-        image="ghcr.io/my-org/my-image:v1.0.0",
+        image=github_container_registry,
     ),
     options=[command],
 )

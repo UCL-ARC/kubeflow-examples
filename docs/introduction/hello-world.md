@@ -51,7 +51,7 @@ Pushing container images to GitHub container registry
 ```bash
 docker push ghcr.io/${GITHUB_ORG}/${PROJECT_NAME}/${IMAGENAME}:${VERSION_ID}
 ```
-Go to packages `https://github.com/orgs/${GITHUB_ORG}/packages` and change visibility to public.
+Go to packages `https://github.com/orgs/${GITHUB_ORG}/packages` and in package settings, change visibility to public.
 
 
 ## Docker Management Commands
