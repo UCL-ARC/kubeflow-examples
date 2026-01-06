@@ -15,6 +15,7 @@ To host and distribute container images, you can use the [GitHub Container Regis
 This registry allows you to store, manage, and version Docker images directly through GitHub for seamless integration with your CI/CD workflows.
 
 ### Build Dockerfile container
+The following variables names are used in the terminal to help to build docker images.
 ```bash
 IMAGENAME=kubeflowtrainerimage
 VERSION_ID=v0.0.1
@@ -55,13 +56,13 @@ Go to packages `https://github.com/orgs/${GITHUB_ORG}/packages` and in package s
 
 
 ## Docker Management Commands
+The following are a few useful commands, for more comprehensive list see this [cheatsheet](https://www.linuxteck.com/docker-management-command-cheat-sheet/)
 ```bash
-docker images && docker ps
-docker exec -it <container_id> bash
-docker exec -it $(docker container ls  | grep '${IMAGENAME}' | awk '{print $1}') bash
-docker stop $(docker ps -q)
-docker system prune -f --volumes
-docker rmi --force <ID>
+docker images && docker ps # that list images containers
+docker exec -it <container_id> bash # Exececute command inside the containers
+docker exec -it $(docker container ls  | grep '${IMAGENAME}' | awk '{print $1}') bash # use IMAGENAME variable to select container id for docker command execution
+docker system prune -f --volumes #free up disk space
+docker rmi --force <ID> # remove docker images
 ```
 
 
