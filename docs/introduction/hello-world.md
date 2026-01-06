@@ -4,8 +4,7 @@ description:
 weight: 2
 ---
 
-Hello world examples for kubeflow trainer in unified-AI.
-
+Hello world examples for kubeflow trainer in unified-AI that use files [hello-world-customised-images](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/tree/main/hello-world-customised-images).
 
 ## Customised images
 
@@ -65,8 +64,9 @@ docker system prune -f --volumes #free up disk space
 docker rmi --force <ID> # remove docker images
 ```
 
+### Example that connects to Unified-AI Kubeflow
+Once you build your customised image with the files [hello-world-customised-images](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/tree/main/hello-world-customised-images), you will connect to Unified-AI platform with the following steps:
 
-### Connecting to Unified-AI Kubeflow
 1. Connect to VPN to access https://kubeflow.arc-unified-ai.condenser.arc.ucl.ac.uk
 2. Create new Unified-AI notebook that mainly have these resources:
     * CPU: 2
