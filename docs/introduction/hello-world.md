@@ -73,7 +73,7 @@ Once you build your customised image with the files [hello-world-customised-imag
     * RAM: 4Gb
     * GPUs: 2 (A100 80GB)
     * Workspace Volume of 20Gb
-3. Run python script in the terminal
+3. Run python script in the terminal. For SDK abstraction with kubeflow training, refer to [docs/kubeflow_training_operator/](https://kubeflow.arc-unified-ai.condenser.arc.ucl.ac.uk/docs/kubeflow_training_operator/)
 ```bash
 python quickstart-container-registry.py
 ```
