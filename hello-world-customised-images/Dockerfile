@@ -28,9 +28,11 @@ COPY pyproject.toml ./
 RUN uv venv && \
     uv sync
 
+# Switch to default user `$NB_UID` is defined in base image
+USER $NB_UID
 
 # Copy application files
-COPY quickstart-container-registry.py .
+COPY quickstart-container-registry.ipynb .
 COPY my-entrypoint.sh .
 COPY . .
 

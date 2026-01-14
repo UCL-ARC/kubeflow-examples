@@ -1,5 +1,5 @@
 ---
-title: Hello world examples
+title: Customised images
 description:
 weight: 2
 ---
@@ -68,12 +68,5 @@ docker rmi --force <ID> # remove docker images
 Once you build your customised image with the files [hello-world-customised-images](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/tree/main/hello-world-customised-images), you will connect to Unified-AI platform with the following steps:
 
 1. Connect to VPN to access https://kubeflow.arc-unified-ai.condenser.arc.ucl.ac.uk
-2. Create new Unified-AI notebook that mainly have these resources:
-    * CPU: 2
-    * RAM: 4Gb
-    * GPUs: 2 (A100 80GB)
-    * Workspace Volume of 20Gb
-3. Run python script in the terminal. For SDK abstraction with kubeflow training, refer to [docs/kubeflow_training_operator/](https://kubeflow.arc-unified-ai.condenser.arc.ucl.ac.uk/docs/kubeflow_training_operator/)
-```bash
-python quickstart-container-registry.py
-```
+2. Create new Unified-AI notebook (as shown in `quickstart-mnist` section) or connect to an already created namespace
+3. Run cells in the jupyter notebook. For SDK abstraction with kubeflow training, refer to [docs/kubeflow_training_operator/](https://kubeflow.arc-unified-ai.condenser.arc.ucl.ac.uk/docs/kubeflow_training_operator/)
