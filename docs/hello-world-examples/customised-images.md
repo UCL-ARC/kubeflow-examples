@@ -14,18 +14,17 @@ To host and distribute container images, you can use the [GitHub Container Regis
 This registry allows you to store, manage, and version Docker images directly through GitHub for seamless integration with your CI/CD workflows.
 
 ### Build Dockerfile container
-The following variables names are used in the terminal to help to build docker images.
+Go to the directory containing the Dockerfile and the other relevant files, then define the following environment variables in the terminal to help build the Docker images.
 ```bash
 IMAGENAME=kubeflowtrainerimage
-VERSION_ID=v0.0.1
+VERSION_ID=v0.0.2
 docker build -t ${IMAGENAME}:${VERSION_ID} -f Dockerfile .
 ```
 See an example of output logs for `docker images`:
 ```bash
-IMAGE                               ID             DISK USAGE   CONTENT SIZE   EXTRA
-kubeflowtrainerimage:v0.0.1         f52d1846deae       7.75GB             0B
+IMAGE                         ID             DISK USAGE   CONTENT SIZE   EXTRA
+kubeflowtrainerimage:v0.0.2   ad373c751185       12.2GB         4.37GB
 ```
-
 
 ### Authenticating with a personal access token (classic)
 1. Create `Personal access tokens (classic)` https://github.com/settings/tokens
@@ -38,13 +37,14 @@ kubeflowtrainerimage:v0.0.1         f52d1846deae       7.75GB             0B
 GITHUB_USERNAME=YOUR_GITHUB_USERNAME_ID
 export CR_PAT=YOUR_PERSONAL_ACCESS_TOKEN
 echo ${CR_PAT} | docker login ghcr.io -u ${GITHUB_USERNAME} --password-stdin
+	#Login Succeeded
 ```
 
 ### Pushing container images
 Tag your Docker image using the image ID and your desired image name and hosting destination.
 ```bash
 GITHUB_ORG=YOUR_GITHUB_ORG or YOUR_GITHUB_USERNAME_ID
-PROJECT_NAME=YOUR_PROJECT_NAME
+PROJECT_NAME=YOUR_PROJECT_NAME or #PROJECT_NAME=$IMAGENAME
 docker tag ${IMAGENAME}:${VERSION_ID} ghcr.io/${GITHUB_ORG}/${PROJECT_NAME}/${IMAGENAME}:${VERSION_ID}
 ```
 Pushing container images to GitHub container registry
@@ -54,17 +54,17 @@ docker push ghcr.io/${GITHUB_ORG}/${PROJECT_NAME}/${IMAGENAME}:${VERSION_ID}
 Go to packages `https://github.com/orgs/${GITHUB_ORG}/packages` and in package settings, change visibility to public.
 
 
-## Docker Management Commands
+### Docker Management Commands
 The following are a few useful commands, for more comprehensive list see this [cheatsheet](https://www.linuxteck.com/docker-management-command-cheat-sheet/)
 ```bash
 docker images && docker ps # that list images containers
-docker exec -it <container_id> bash # Exececute command inside the containers
-docker exec -it $(docker container ls  | grep '${IMAGENAME}' | awk '{print $1}') bash # use IMAGENAME variable to select container id for docker command execution
-docker system prune -f --volumes #free up disk space
+docker exec -it <container_id> # Exececute command inside the containers
+docker exec -it $(docker container ls  | grep '${IMAGENAME}' | awk '{print $1}') # use IMAGENAME variable to select container id for docker command execution
 docker rmi --force <ID> # remove docker images
+qdocker system prune -f --volumes # free up disk space
 ```
 
-### Example that connects to Unified-AI Kubeflow
+## Example that connects to Unified-AI Kubeflow
 Once you build your customised image with the files [hello-world-customised-images](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/tree/main/hello-world-customised-images), you will connect to Unified-AI platform with the following steps:
 
 1. Connect to VPN to access https://kubeflow.arc-unified-ai.condenser.arc.ucl.ac.uk
