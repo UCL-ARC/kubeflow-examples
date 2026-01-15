@@ -8,7 +8,9 @@ Hello world examples illustrate steps to run basic kubeflow trainer examples in 
 
 ## Setting up Unified-AI notebook
 
-Follow [documentation](https://kubeflow.arc-unified-ai.condenser.arc.ucl.ac.uk/docs/kubeflow_notebooks/) to create notebook that mainly have these resources:
+Follow [documentation](https://kubeflow.arc-unified-ai.condenser.arc.ucl.ac.uk/docs/kubeflow_notebooks/) to create notebooks.
+The following notebook settings are examples for running the provided examples. The exact settings will depend on the needs of the users and their applications.
+We recommend using the minimum resources required for your workload.
 
 * CPU: 2
 * RAM: 4Gb
