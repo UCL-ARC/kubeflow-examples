@@ -4,8 +4,7 @@ FROM python:3.11-slim
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    UV_PROJECT_ENVIRONMENT="/app/.venv" \
-    PATH="/root/.local/bin:${PATH}"
+    UV_PROJECT_ENVIRONMENT="/app/.venv"
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -18,15 +17,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install UV package manager (standalone installer)
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
+# Update PATH to include uv
+ENV PATH="/root/.local/bin:${PATH}"
+
 # Set working directory
 WORKDIR /app
 
 # Copy dependency files (prioritize pyproject.toml/uv.lock)
 COPY pyproject.toml ./
 
-# Just create venv and install dependencies without frozen mode
+# Create venv and install dependencies
 RUN uv venv && \
     uv sync
+
+# Update PATH to include the virtual environment
+ENV PATH="/app/.venv/bin:${PATH}"
 
 # Copy application files
 COPY quickstart-container-registry.ipynb .

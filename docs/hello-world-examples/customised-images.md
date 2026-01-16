@@ -17,13 +17,26 @@ This registry allows you to store, manage, and version Docker images directly th
 Go to the directory containing the Dockerfile and the other relevant files, then define the following environment variables in the terminal to help build the Docker images.
 ```bash
 IMAGENAME=kubeflowtrainerimage
-VERSION_ID=v0.0.2
+VERSION_ID=v0.0.3
 docker build -t ${IMAGENAME}:${VERSION_ID} -f Dockerfile .
 ```
-See an example of output logs for `docker images`:
+See an example of output logs for the command `docker images`:
 ```bash
-IMAGE                         ID             DISK USAGE   CONTENT SIZE   EXTRA
-kubeflowtrainerimage:v0.0.2   ad373c751185       12.2GB         4.37GB
+#docker images
+IMAGE                                                                 ID             DISK USAGE   CONTENT SIZE   EXTRA
+kubeflowtrainerimage:v0.0.3                                           9bf1870f0a39       12.2GB         4.37GB
+```
+
+### To debug
+You can run a test distributed functionality:
+```
+docker run --rm \
+  -e MASTER_ADDR=localhost \
+  -e MASTER_PORT=12355 \
+  -e RANK=0 \
+  -e WORLD_SIZE=1 \
+  ${IMAGENAME}:${VERSION_ID} \
+  python -c "import torch; print('PyTorch successfully imported')"
 ```
 
 ### Authenticating with a personal access token (classic)

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Activate virtual environment (though PATH already handles this)
+source /app/.venv/bin/activate
+
 # Set up environment variables for distributed training
 export LOCAL_RANK=${LOCAL_RANK:-0}
 export RANK=${RANK:-0}
