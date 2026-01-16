@@ -17,14 +17,14 @@ This registry allows you to store, manage, and version Docker images directly th
 Go to the directory containing the Dockerfile and the other relevant files, then define the following environment variables in the terminal to help build the Docker images.
 ```bash
 IMAGENAME=kubeflowtrainerimage
-VERSION_ID=v0.0.3
+VERSION_ID=v0.0.4
 docker build -t ${IMAGENAME}:${VERSION_ID} -f Dockerfile .
 ```
 See an example of output logs for the command `docker images`:
 ```bash
 #docker images
 IMAGE                                                                 ID             DISK USAGE   CONTENT SIZE   EXTRA
-kubeflowtrainerimage:v0.0.3                                           9bf1870f0a39       12.2GB         4.37GB
+kubeflowtrainerimage:v0.0.4                                           <>             12.2GB         4.37GB
 ```
 
 ### To debug
