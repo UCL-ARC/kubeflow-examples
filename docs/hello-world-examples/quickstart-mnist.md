@@ -15,4 +15,4 @@ Since the compute of the notebook will only be used for quick testing and for su
 You can then run examples using terminal for python scripts and jupyter notebook for notebooks.
 
 * [quickstart.ipynb](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/hello-world/quickstart.ipynb)
-* [mnist.ipynb](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/hello-world/mnist.ipynb)
+* [mnist.ipynb](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/hello-world-mnist/mnist.ipynb)
