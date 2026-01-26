@@ -29,7 +29,9 @@
 # ```bash
 # kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[].resources.requests.cpu}{"\n"}{end}'
 # ```
-# Filter Pods Using jq that  Retrieves all Pods in JSON format. Uses jq to filter Pods that are failing to pull container images. Prints only the names of affected Pods.
+# Filter Pods Using jq that  Retrieves all Pods in JSON format.
+# Uses jq to filter Pods that are failing to pull container images (e.g., Running, ImagePullBackOff or ErrImagePull).
+# Prints only the names of affected Pods.
 # This is particularly useful for quickly identifying broken or misconfigured workloads.
 # ```bash
 # kubectl get pods -o json | jq -r '.items[]| select(.status.phase=="Running").metadata.name'
@@ -83,9 +85,9 @@ kubectl_ns() {
 # Command 1: Show CPU requests
 cmd_cpu_requests() {
     echo -e "${BLUE}=== Pod CPU Requests ===${NC}"
-    echo -e "${GREEN}Pod Name\tCPU Request${NC}"
+    echo -e "${GREEN}Pod Name \t \t \t \t  per-container:CPU Request${NC}"
     echo "--------------------------------"
-    kubectl_ns get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[].resources.requests.cpu}{"\n"}{end}' | \
+    kubectl_ns get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .spec.containers[*]}{.name}{":"}{.resources.requests.cpu}{" "}{end}{"\n"}{end}' | \
         column -t -s $'\t' || echo "No pods found or error retrieving data"
 }
 

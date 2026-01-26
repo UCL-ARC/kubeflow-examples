@@ -18,6 +18,7 @@ These are briefly explained below and shown in the figure.
 * **Service**: Provides a stable network endpoint (IP address or DNS name). Services allow Pods to communicate with each other and can also expose applications to external users.
 * **Node**: A physical or virtual machine that runs containerised applications. Each Node hosts one or more Pods.
 * **Pod**: The smallest unit that can be deployed in Kubernetes. A Pod contains one or more containers that share storage, networking, and other resources.
+* **Container**: A lightweight and standalone excecutable package.
 
 ![Kubernetes basic components](../assets/images/k8s-basic-components.svg)
 
@@ -86,7 +87,7 @@ Use this command to understand why a Job is running slowly, failing, or stuck.
 
 Important fields include:#
 
-* **Parallelism / **Completions: How many Pods run in parallel and how many must complete.
+* **Parallelism / Completions**: How many Pods run in parallel and how many must complete.
 * **Suspend**: Whether the Job is paused.
 * **Pods Statuses**: Number of active, succeeded, and failed Pods.
 * **Pod Template**: The Pod specification used by the Job, including:
@@ -111,7 +112,7 @@ bash pod-info.sh --help
 ```
 
 * Help output:
-```bash
+```text
 <!-- Pod Information Script - Simplified kubectl queries
 
 Usage: pod-info.sh [OPTIONS] COMMAND
@@ -135,7 +136,7 @@ Examples:
 
 **Example: Get detailed pod information for a namespace**
 ```bash
-bash pod-info.sh --namespace kubeflow-m-xochicale all-info
+bash bash_scrips/pod-info.sh --namespace kubeflow-m-xochicale all-info
 ```
 
 Sample output
@@ -144,7 +145,6 @@ Sample output
 Getting pod information...
 
 1. Basic Pod Status:
-Opening in existing browser session.
 NAME                                               READY   STATUS             RESTARTS   AGE
 f83d03fca881-node-0-0-rmkrw                        0/1     ImagePullBackOff   0          3d
 ml-pipeline-ui-artifact-55894b5986-8cmz7           2/2     Running            0          4h45m
