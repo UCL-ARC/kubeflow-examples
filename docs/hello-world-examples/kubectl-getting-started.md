@@ -18,7 +18,7 @@ These are briefly explained below and shown in the figure.
 * **Service**: Provides a stable network endpoint (IP address or DNS name). Services allow Pods to communicate with each other and can also expose applications to external users.
 * **Node**: A physical or virtual machine that runs containerised applications. Each Node hosts one or more Pods.
 * **Pod**: The smallest unit that can be deployed in Kubernetes. A Pod contains one or more containers that share storage, networking, and other resources.
-* **Container**: A lightweight and standalone excecutable package.
+* **Container**: A lightweight and standalone executable package.
 
 ![Kubernetes basic components](../assets/images/k8s-basic-components.svg)
 
@@ -85,7 +85,7 @@ kubectl describe job f83d03fca881-node-0
 This command gives detailed information about how the Job is configured and how it is progressing.
 Use this command to understand why a Job is running slowly, failing, or stuck.
 
-Important fields include:#
+Important fields include:
 
 * **Parallelism / Completions**: How many Pods run in parallel and how many must complete.
 * **Suspend**: Whether the Job is paused.
@@ -108,7 +108,7 @@ We provide a Pod Information Script,[`pod-info.sh`](https://github.com/ucl-arc-e
 
 * View the help menu:
 ```bash
-bash pod-info.sh --help
+bash bash_scrips/pod-info.sh --help
 ```
 
 * Help output:
