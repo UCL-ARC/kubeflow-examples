@@ -44,7 +44,7 @@ f83d03fca881            0/1     ImagePullBackOff   0          2d22h
 This command provides detailed information about a specific Pod.
 Use kubectl describe pod when a Pod is not behaving as expected.
 ```bash
-kubectl describe pod mx-notebook-06-0  
+kubectl describe pod mx-notebook-06-0
 ```
 
 Key sections to look at:
@@ -174,4 +174,3 @@ f83d03fca881-node-0-0-rmkrw
 ## References
 * What is kubectl?: https://dockerlabs.collabnix.com/kubernetes/beginners/what-is-kubect.html
 * The Main Components of Kubernetes Explained: https://www.linkedin.com/posts/nikkisiapno_the-main-components-of-kubernetes-explained-activity-7289900175534284801-JLVC
-

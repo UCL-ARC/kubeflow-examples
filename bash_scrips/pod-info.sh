@@ -3,7 +3,7 @@
 # ============================================================================
 # Script: pod-info.sh
 # Description: Simplified interface for common pod information queries
-# 
+#
 # Usage: pod-info.sh [OPTIONS] COMMAND
 
 # Options:
@@ -24,7 +24,7 @@
 
 # Notation
 # You can use commands directly in the terminal as follows
-# For Lists all Pods that Prints the Pod name followed by the CPU request for each container. 
+# For Lists all Pods that Prints the Pod name followed by the CPU request for each container.
 # Useful for checking resource requests across workloads.
 # ```bash
 # kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[].resources.requests.cpu}{"\n"}{end}'
@@ -93,7 +93,7 @@ cmd_cpu_requests() {
 cmd_image_pull_errors() {
     echo -e "${BLUE}=== Pods with ImagePullBackOff Errors ===${NC}"
     pods=$(kubectl_ns get pods -o json | jq -r '.items[] | select(.status.phase=="ImagePullBackOff" or (.status.containerStatuses[]? | .state.waiting.reason=="ImagePullBackOff")) | .metadata.name')
-    
+
     if [[ -z "$pods" ]]; then
         echo -e "${GREEN}No pods with ImagePullBackOff errors found${NC}"
     else
@@ -124,16 +124,16 @@ cmd_resources() {
 cmd_all_info() {
     echo -e "${BLUE}=== All Pod Information ===${NC}"
     echo "Getting pod information..."
-    
+
     echo -e "\n${YELLOW}1. Basic Pod Status:${NC}"
     kubectl_ns get pods
-    
+
     echo -e "\n${YELLOW}2. Pods with CPU Requests:${NC}"
     cmd_cpu_requests
-    
+
     echo -e "\n${YELLOW}3. Pods with ImagePullBackOff:${NC}"
     cmd_image_pull_errors
-    
+
     echo -e "\n${YELLOW}4. Running Pods:${NC}"
     cmd_running_pods
 }
