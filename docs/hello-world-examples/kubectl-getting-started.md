@@ -101,26 +101,73 @@ Important fields include:#
 
 Kubernetes outputs a lot of information. Filtering helps you extract only what you need.
 
-**Extract Pod Names and CPU Requests**
+We provide a Pod Information Script,[`pod-info.sh`](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/bash_scrips/pod-info.sh), which simplifies common kubectl queries.
 
-Lists all Pods. Prints the Pod name followed by the CPU request for each container. Useful for checking resource requests across workloads.
+**Using the Pod Information Script**
 
+* View the help menu:
 ```bash
-kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[].resources.requests.cpu}{"\n"}{end}'
+bash pod-info.sh --help
 ```
 
-**Filter Pods Using jq**
-
-Retrieves all Pods in JSON format. Uses jq to filter Pods that are failing to pull container images. Prints only the names of affected Pods.
-
-This is particularly useful for quickly identifying broken or misconfigured workloads.
-
+* Help output:
 ```bash
-kubectl get pods -o json | jq -r '.items[]| select(.status.phase=="Running").metadata.name'
+<!-- Pod Information Script - Simplified kubectl queries
+
+Usage: pod-info.sh [OPTIONS] COMMAND
+
+Options:
+  -n, --namespace NAMESPACE   Kubernetes namespace (default: default)
+  -h, --help                  Show this help message
+
+Commands:
+  cpu-requests                Show pod names with CPU requests
+  image-pull-errors           Show pods with ImagePullBackOff errors
+  running                     Show only running pods
+  resources                   Show pod names with CPU and memory requests
+  all-info                    Show detailed pod information
+
+Examples:
+  pod-info.sh cpu-requests
+  pod-info.sh -n production image-pull-errors
+  pod-info.sh resources
 ```
 
+**Example: Get detailed pod information for a namespace**
+```bash
+bash pod-info.sh --namespace kubeflow-m-xochicale all-info
+```
 
+Sample output
+```bash
+=== All Pod Information ===
+Getting pod information...
 
+1. Basic Pod Status:
+Opening in existing browser session.
+NAME                                               READY   STATUS             RESTARTS   AGE
+f83d03fca881-node-0-0-rmkrw                        0/1     ImagePullBackOff   0          3d
+ml-pipeline-ui-artifact-55894b5986-8cmz7           2/2     Running            0          4h45m
+xdbe7d23d9c4-node-0-0-95ps7                        0/1     ImagePullBackOff   0          3d
+
+2. Pods with CPU Requests:
+=== Pod CPU Requests ===
+Pod Name	CPU Request
+--------------------------------
+k15245788332-node-0-0-bg4lj                       200m
+ml-pipeline-visualizationserver-847879f7bb-lgfjd  50m
+mx-notebook-06-0                                  2
+
+3. Pods with ImagePullBackOff:
+=== Pods with ImagePullBackOff Errors ===
+Found pods with ImagePullBackOff:
+f83d03fca881-node-0-0-rmkrw
+
+4. Running Pods:
+=== Running Pods ===
+✓ ml-pipeline-ui-artifact-55894b5986-8cmz7
+✓ mx-notebook-06-0
+```
 
 
 
