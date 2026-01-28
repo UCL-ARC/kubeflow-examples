@@ -102,13 +102,13 @@ Important fields include:
 
 Kubernetes outputs a lot of information. Filtering helps you extract only what you need.
 
-We provide a Pod Information Script,[`pod-info.sh`](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/bash_scrips/pod-info.sh), which simplifies common kubectl queries.
+We provide a Pod Information Script, [`pod-info.sh`](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/bash_scrips/pod-info.sh), which simplifies common kubectl queries.
 
 **Using the Pod Information Script**
 
 * View the help menu:
 ```bash
-bash bash_scrips/pod-info.sh --help
+bash pod-info.sh --help
 ```
 
 * Help output:
@@ -136,7 +136,7 @@ Examples:
 Run this [mnist](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/hello-world-mnist/mnist.ipynb) jupyter notebook and after the cell for checking job status directly, you can run `bash pod-info.sh all-info`
 
 ```bash
-bash bash_scrips/pod-info.sh all-info
+bash pod-info.sh all-info
 ```
 
 Sample output

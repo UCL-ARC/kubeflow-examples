@@ -160,10 +160,6 @@ if ! command -v kubectl &> /dev/null; then
     exit 1
 fi
 
-if ! command -v jq &> /dev/null; then
-    echo -e "${YELLOW}Warning: jq is not installed. Some commands may not work properly.${NC}"
-fi
-
 # Execute command
 case "$COMMAND" in
     cpu-requests|cpu)
