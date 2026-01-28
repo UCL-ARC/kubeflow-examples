@@ -113,60 +113,57 @@ bash bash_scrips/pod-info.sh --help
 
 * Help output:
 ```text
-<!-- Pod Information Script - Simplified kubectl queries
+Pod Information Script - Simplified kubectl queries
 
 Usage: pod-info.sh [OPTIONS] COMMAND
 
 Options:
-  -n, --namespace NAMESPACE   Kubernetes namespace (default: default)
   -h, --help                  Show this help message
 
 Commands:
   cpu-requests                Show pod names with CPU requests
-  image-pull-errors           Show pods with ImagePullBackOff errors
-  running                     Show only running pods
   resources                   Show pod names with CPU and memory requests
   all-info                    Show detailed pod information
 
 Examples:
   pod-info.sh cpu-requests
-  pod-info.sh -n production image-pull-errors
   pod-info.sh resources
 ```
 
 **Example: Get detailed pod information for a namespace**
 ```bash
-bash bash_scrips/pod-info.sh --namespace kubeflow-m-xochicale all-info
+bash bash_scrips/pod-info.sh all-info
 ```
 
 Sample output
 ```bash
 === All Pod Information ===
-Getting pod information...
 
 1. Basic Pod Status:
-NAME                                               READY   STATUS             RESTARTS   AGE
-f83d03fca881-node-0-0-rmkrw                        0/1     ImagePullBackOff   0          3d
-ml-pipeline-ui-artifact-55894b5986-8cmz7           2/2     Running            0          4h45m
-xdbe7d23d9c4-node-0-0-95ps7                        0/1     ImagePullBackOff   0          3d
+NAME                                               READY   STATUS      RESTARTS   AGE
+j0893062d2b7-node-0-0-zbksk                        0/1     Completed   0          19h
+ml-pipeline-ui-artifact-55894b5986-xnmmg           2/2     Running     0          22h
+ml-pipeline-visualizationserver-847879f7bb-lgfjd   2/2     Running     0          2d1h
+mx-notebook-06-0                                   2/2     Running     0          21h
 
 2. Pods with CPU Requests:
 === Pod CPU Requests ===
-Pod Name	CPU Request
+Pod Name	per-container:CPU Request
 --------------------------------
-k15245788332-node-0-0-bg4lj                       200m
-ml-pipeline-visualizationserver-847879f7bb-lgfjd  50m
-mx-notebook-06-0                                  2
+j0893062d2b7-node-0-0-zbksk                       node:2
+ml-pipeline-ui-artifact-55894b5986-xnmmg          ml-pipeline-ui-artifact:10m
+ml-pipeline-visualizationserver-847879f7bb-lgfjd  ml-pipeline-visualizationserver:50m
+mx-notebook-06-0                                  mx-notebook-06:2
 
-3. Pods with ImagePullBackOff:
-=== Pods with ImagePullBackOff Errors ===
-Found pods with ImagePullBackOff:
-f83d03fca881-node-0-0-rmkrw
+3. Pod Resource Requests:
+=== Pod Resource Requests ===
+Pod Name	CPU	Memory
+----------------------------------------
+j0893062d2b7-node-0-0-zbksk                       2    16Gi
+ml-pipeline-ui-artifact-55894b5986-xnmmg          10m  70Mi
+ml-pipeline-visualizationserver-847879f7bb-lgfjd  50m  200Mi
+mx-notebook-06-0                                  2    4Gi
 
-4. Running Pods:
-=== Running Pods ===
-✓ ml-pipeline-ui-artifact-55894b5986-8cmz7
-✓ mx-notebook-06-0
 ```
 
 
