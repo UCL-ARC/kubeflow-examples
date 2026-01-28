@@ -41,6 +41,7 @@ Options:
 Commands:
   cpu-requests                Show pod names with CPU requests
   resources                   Show pod names with CPU and memory requests
+  flavors                     Show Flavors Reservation and Usage
   all-info                    Show detailed pod information
 
 Examples:
@@ -53,7 +54,7 @@ EOF
 # Command 1: Show CPU requests
 cmd_cpu_requests() {
     echo -e "${BLUE}=== Pod CPU Requests ===${NC}"
-    echo -e "${GREEN}Pod Name\tper-container:CPU Request${NC}"
+    echo -e "${GREEN}Pod Name\tper-container:Number of CPUs Requested${NC}"
     echo "--------------------------------"
     kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .spec.containers[*]}{.name}{":"}{.resources.requests.cpu}{" "}{end}{"\n"}{end}' | \
         column -t -s $'\t' || echo "No pods found or error retrieving data"
@@ -68,7 +69,54 @@ cmd_resources() {
         column -t -s $'\t' || echo "No pods found or error retrieving data"
 }
 
-# Command 3: Show all pod information
+# Command 3: Show Flavors Reservation and Usage
+cmd_flavors() {
+    echo -e "${BLUE}=== Flavors Reservation and Usage ===${NC}"
+    echo -e "${GREEN}Flavor\tTotal${NC}"
+    echo "---------------------------------------------------------------------------------------"
+    kubectl describe localqueue default | awk '
+    /Flavors Reservation:/ {mode="Reservation"; next}
+    /Flavors Usage:/       {mode="Usage"; next}
+
+    /Name:[[:space:]]+a/ && !flavor {
+    flavor=$2
+    next
+    }
+
+    /Name:[[:space:]]+(cpu|memory|ephemeral-storage|nvidia.com\/gpu|pods)/ {
+    res=$2
+    getline
+    val=$2
+    data[res,mode]=val
+    }
+
+    END {
+    printf "%-25s %-30s %-30s\n",
+            "RESOURCE",
+            "RESERVED (" flavor ")",
+            "USED (" flavor ")"
+
+    printf "%-25s %-30s %-30s\n",
+            "------------------------",
+            "------------------------------",
+            "------------------------------"
+
+    for (k in data) {
+        split(k, a, SUBSEP)
+        resources[a[1]]=1
+    }
+
+    for (r in resources) {
+        printf "%-25s %-30s %-30s\n",
+            r,
+            data[r,"Reservation"],
+            data[r,"Usage"]
+    }
+    }'
+}
+
+
+# Command 4: Show all pod information
 cmd_all_info() {
     echo -e "${BLUE}=== All Pod Information ===${NC}"
 
@@ -80,6 +128,9 @@ cmd_all_info() {
 
     echo -e "\n${YELLOW}3. Pod Resource Requests:${NC}"
     cmd_resources
+
+    echo -e "\n${YELLOW}4. Show workloads with Flavors Reservation and Usage:${NC}"
+    cmd_flavors
 }
 
 # Parse arguments
@@ -120,6 +171,9 @@ case "$COMMAND" in
         ;;
     resources|resource-requests)
         cmd_resources
+        ;;
+    flavors|resource-flavors)
+        cmd_flavors
         ;;
     all-info|all)
         cmd_all_info

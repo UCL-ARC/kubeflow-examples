@@ -123,6 +123,7 @@ Options:
 Commands:
   cpu-requests                Show pod names with CPU requests
   resources                   Show pod names with CPU and memory requests
+  flavors                     Show Flavors Reservation and Usage
   all-info                    Show detailed pod information
 
 Examples:
@@ -130,40 +131,66 @@ Examples:
   pod-info.sh resources
 ```
 
-**Example: Get detailed pod information for a namespace**
+**Example: Get detailed pod information for your namespace**
+
+Run this [mnist](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/hello-world-mnist/mnist.ipynb) jupyter notebook and after the cell for checking job status directly, you can run `bash pod-info.sh all-info`
+
 ```bash
 bash bash_scrips/pod-info.sh all-info
 ```
 
 Sample output
-```bash
+```text
 === All Pod Information ===
 
 1. Basic Pod Status:
-NAME                                               READY   STATUS      RESTARTS   AGE
-j0893062d2b7-node-0-0-zbksk                        0/1     Completed   0          19h
-ml-pipeline-ui-artifact-55894b5986-xnmmg           2/2     Running     0          22h
-ml-pipeline-visualizationserver-847879f7bb-lgfjd   2/2     Running     0          2d1h
-mx-notebook-06-0                                   2/2     Running     0          21h
+NAME                                               READY   STATUS    RESTARTS   AGE
+ml-pipeline-ui-artifact-55894b5986-xnmmg           2/2     Running   0          24h
+ml-pipeline-visualizationserver-847879f7bb-lgfjd   2/2     Running   0          2d3h
+mx-notebook-06-0                                   2/2     Running   0          23h
+v54b375a0eb1-node-0-0-gf89q                        1/1     Running   0          4s
+v54b375a0eb1-node-0-1-csg8z                        1/1     Running   0          4s
+v54b375a0eb1-node-0-2-8v9qj                        1/1     Running   0          4s
+v54b375a0eb1-node-0-3-qfq2w                        1/1     Running   0          3s
+v54b375a0eb1-node-0-4-9t9dr                        1/1     Running   0          3s
 
 2. Pods with CPU Requests:
 === Pod CPU Requests ===
-Pod Name	per-container:CPU Request
+Pod Name	per-container:Number of CPUs Requested
 --------------------------------
-j0893062d2b7-node-0-0-zbksk                       node:2
 ml-pipeline-ui-artifact-55894b5986-xnmmg          ml-pipeline-ui-artifact:10m
 ml-pipeline-visualizationserver-847879f7bb-lgfjd  ml-pipeline-visualizationserver:50m
 mx-notebook-06-0                                  mx-notebook-06:2
+v54b375a0eb1-node-0-0-gf89q                       node:5
+v54b375a0eb1-node-0-1-csg8z                       node:5
+v54b375a0eb1-node-0-2-8v9qj                       node:5
+v54b375a0eb1-node-0-3-qfq2w                       node:5
+v54b375a0eb1-node-0-4-9t9dr                       node:5
 
 3. Pod Resource Requests:
 === Pod Resource Requests ===
 Pod Name	CPU	Memory
 ----------------------------------------
-j0893062d2b7-node-0-0-zbksk                       2    16Gi
 ml-pipeline-ui-artifact-55894b5986-xnmmg          10m  70Mi
 ml-pipeline-visualizationserver-847879f7bb-lgfjd  50m  200Mi
 mx-notebook-06-0                                  2    4Gi
+v54b375a0eb1-node-0-0-gf89q                       5    2Gi
+v54b375a0eb1-node-0-1-csg8z                       5    2Gi
+v54b375a0eb1-node-0-2-8v9qj                       5    2Gi
+v54b375a0eb1-node-0-3-qfq2w                       5    2Gi
+v54b375a0eb1-node-0-4-9t9dr                       5    2Gi
 
+4. Show workloads with Flavors Reservation and Usage:
+=== Flavors Reservation and Usage ===
+Flavor	Total
+---------------------------------------------------------------------------------------
+RESOURCE                  RESERVED (a100-80gb-nvlink)    USED (a100-80gb-nvlink)
+------------------------  ------------------------------ ------------------------------
+cpu                       27360m                         27360m
+pods                      8                              8
+ephemeral-storage         42460Mi                        42460Mi
+nvidia.com/gpu            5                              5
+memory                    14990Mi                        14990Mi
 ```
 
 
