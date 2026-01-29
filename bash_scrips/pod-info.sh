@@ -40,13 +40,13 @@ Options:
 
 Commands:
   cpu-requests                Show pod names with CPU requests
-  resources                   Show pod names with CPU and memory requests
+  memory-requests                   Show pod names with CPU and memory requests
   flavors                     Show Flavors Reservation and Usage
   all-info                    Show detailed pod information
 
 Examples:
   $0 cpu-requests
-  $0 resources
+  $0 memory-requests
 EOF
 }
 
@@ -61,7 +61,7 @@ cmd_cpu_requests() {
 }
 
 # Command 2: Show CPU and memory requests
-cmd_resources() {
+cmd_memory_requests() {
     echo -e "${BLUE}=== Pod Resource Requests ===${NC}"
     echo -e "${GREEN}Pod Name\tCPU\tMemory${NC}"
     echo "----------------------------------------"
@@ -126,8 +126,8 @@ cmd_all_info() {
     echo -e "\n${YELLOW}2. Pods with CPU Requests:${NC}"
     cmd_cpu_requests
 
-    echo -e "\n${YELLOW}3. Pod Resource Requests:${NC}"
-    cmd_resources
+    echo -e "\n${YELLOW}3. Pod Resource for Memory Requests:${NC}"
+    cmd_memory_requests
 
     echo -e "\n${YELLOW}4. Show workloads with Flavors Reservation and Usage:${NC}"
     cmd_flavors
@@ -165,8 +165,8 @@ case "$COMMAND" in
     cpu-requests|cpu)
         cmd_cpu_requests
         ;;
-    resources|resource-requests)
-        cmd_resources
+    memory-requests|mem)
+        cmd_memory_requests
         ;;
     flavors|resource-flavors)
         cmd_flavors
