@@ -26,6 +26,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # Help function
@@ -40,8 +41,9 @@ Options:
 
 Commands:
   cpu-requests                Show pod names with CPU requests
-  memory-requests                   Show pod names with CPU and memory requests
+  memory-requests             Show pod names with CPU and memory requests
   flavors                     Show Flavors Reservation and Usage
+  gpu-requests                Show GPU and memory requests
   all-info                    Show detailed pod information
 
 Examples:
@@ -115,8 +117,44 @@ cmd_flavors() {
     }'
 }
 
+# Command 4: Show GPU and memory requests
+cmd_gpu_requests() {
+    # Get queue info
+    read CLUSTERQUEUE PENDING_WORKLOADS ADMITTED_WORKLOADS <<< $(kubectl get localqueue default --no-headers 2>/dev/null | awk '{print $2, $3, $4}')
 
-# Command 4: Show all pod information
+    # Extract the flavor name
+    FLAVOR_NAME=$(kubectl describe clusterqueue "${CLUSTERQUEUE}" 2>/dev/null |
+        awk '/Flavors:/{fl=1} fl && /Name:/ && !/Resources:/ {print $NF; exit}')
+
+    echo -e "${BLUE}===========================================================${NC}"
+    echo -e "${BLUE}GPU Quota: ${YELLOW}${CLUSTERQUEUE}${NC}"
+    echo -e "${BLUE}Pending: ${GREEN}${PENDING_WORKLOADS}${NC} | Admitted: ${GREEN}${ADMITTED_WORKLOADS}${NC}"
+    echo -e "${BLUE}===========================================================${NC}"
+
+    kubectl describe clusterqueue "${CLUSTERQUEUE}" 2>/dev/null | awk -v flavor="$FLAVOR_NAME" '
+        BEGIN {
+            # Create the header with flavor in brackets
+            header = "RESOURCE"
+            if (flavor != "") {
+                header = header " [Flavor: " flavor "]"
+            }
+            printf "%-35s %-15s\n", header, "NOMINAL QUOTA"
+            printf "%-35s %-15s\n", "-----------------------------------", "---------------"
+        }
+        /Flavors:/{fl=1}
+        fl && /Resources:/{rs=1; fl=0}
+        rs && /Name:/ && $0 !~ flavor {
+            resource=$NF
+            getline
+            if ($0 ~ /Nominal Quota:/) {
+                quota=$NF
+                printf "%-35s %-15s\n", resource, quota
+            }
+        }
+    '
+}
+
+# Command 5: Show all pod information
 cmd_all_info() {
     echo -e "${BLUE}=== All Pod Information ===${NC}"
 
@@ -131,6 +169,10 @@ cmd_all_info() {
 
     echo -e "\n${YELLOW}4. Show workloads with Flavors Reservation and Usage:${NC}"
     cmd_flavors
+
+    echo -e "\n${YELLOW}5. Show GPU and memory requests:${NC}"
+    cmd_gpu_requests
+
 }
 
 # Parse arguments
@@ -170,6 +212,9 @@ case "$COMMAND" in
         ;;
     flavors|resource-flavors)
         cmd_flavors
+        ;;
+    gpu-requests|gpu)
+        cmd_gpu_requests
         ;;
     all-info|all)
         cmd_all_info
