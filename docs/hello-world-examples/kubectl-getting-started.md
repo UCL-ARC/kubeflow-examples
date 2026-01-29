@@ -15,7 +15,7 @@ Kubernetes (K8s) is made up of several components, such as namespaces, the contr
 This document focuses on the core building blocks: **containers, Pods, Nodes, and Services**.
 These are briefly explained below and shown in the figure.
 
-* **Service**: Provides a stable network endpoint (IP address or DNS name). Services allow Pods to communicate with each other and can also expose applications to external users.
+* **Service**: A service provides a stable network endpoint (IP address or DNS name). Services allow Pods to communicate with each other and can also expose applications to external users.
 * **Node**: A physical or virtual machine that runs containerised applications. Each Node hosts one or more Pods.
 * **Pod**: The smallest unit that can be deployed in Kubernetes. A Pod contains one or more containers that share storage, networking, and other resources.
 * **Container**: A lightweight and standalone executable package.
