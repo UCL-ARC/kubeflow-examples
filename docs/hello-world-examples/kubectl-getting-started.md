@@ -196,5 +196,5 @@ memory                    14990Mi                        14990Mi
 
 
 ## References
-* What is kubectl?: https://dockerlabs.collabnix.com/kubernetes/beginners/what-is-kubect.html
-* The Main Components of Kubernetes Explained: https://www.linkedin.com/posts/nikkisiapno_the-main-components-of-kubernetes-explained-activity-7289900175534284801-JLVC
+* What is kubectl?: https://kubernetes.io/docs/reference/kubectl/
+* The architectural concepts behind Kubernetes: https://kubernetes.io/docs/concepts/architecture/
