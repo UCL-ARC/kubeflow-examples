@@ -49,11 +49,11 @@ cmd_cpu_requests() {
             found = 1
             pods[++count] = $1
             gsub(/[[:space:]]+$/, "", $2)  # Remove trailing spaces
-            
+
             # Split container entries
             split($2, container_items, " ")
             container_count[count] = 0
-            
+
             for (i in container_items) {
                 if (container_items[i] != "") {
                     container_count[count]++
@@ -61,7 +61,7 @@ cmd_cpu_requests() {
                     split(container_items[i], parts, ":")
                     container_names[count, container_count[count]] = parts[1]
                     cpu_values[count, container_count[count]] = (length(parts) > 1) ? parts[2] : "N/A"
-                    
+
                     # Update max lengths
                     if (length(parts[1]) > max_cont_len) max_cont_len = length(parts[1])
                     if (length(cpu_values[count, container_count[count]]) > max_cpu_len) {
@@ -69,7 +69,7 @@ cmd_cpu_requests() {
                     }
                 }
             }
-            
+
             # Update pod length
             if (length($1) > max_pod_len) max_pod_len = length($1)
         }
@@ -78,11 +78,11 @@ cmd_cpu_requests() {
                 print "No pods found or error retrieving data"
                 exit
             }
-            
+
             # Print header
-            printf "%-" max_pod_len "s  %-" max_cont_len "s  %-" max_cpu_len "s\n", 
+            printf "%-" max_pod_len "s  %-" max_cont_len "s  %-" max_cpu_len "s\n",
                    "Pod Name", "Container", "CPU (millicores)"
-            
+
             # Print separator line
             sep = ""
             for (i = 1; i <= max_pod_len; i++) sep = sep "-"
@@ -91,21 +91,21 @@ cmd_cpu_requests() {
             sep = sep "  "
             for (i = 1; i <= max_cpu_len; i++) sep = sep "-"
             print sep
-            
+
             # Print data
             for (i = 1; i <= count; i++) {
                 if (container_count[i] > 0) {
                     # Print first container
-                    printf "%-" max_pod_len "s  %-" max_cont_len "s  %-" max_cpu_len "s\n", 
+                    printf "%-" max_pod_len "s  %-" max_cont_len "s  %-" max_cpu_len "s\n",
                            pods[i], container_names[i, 1], cpu_values[i, 1]
-                    
+
                     # Print additional containers
                     for (j = 2; j <= container_count[i]; j++) {
-                        printf "%-" max_pod_len "s  %-" max_cont_len "s  %-" max_cpu_len "s\n", 
+                        printf "%-" max_pod_len "s  %-" max_cont_len "s  %-" max_cpu_len "s\n",
                                "", container_names[i, j], cpu_values[i, j]
                     }
                 } else {
-                    printf "%-" max_pod_len "s  %-" max_cont_len "s  %-" max_cpu_len "s\n", 
+                    printf "%-" max_pod_len "s  %-" max_cont_len "s  %-" max_cpu_len "s\n",
                            pods[i], "N/A", "N/A"
                 }
             }
@@ -116,7 +116,7 @@ cmd_cpu_requests() {
 # Command to show CPU and memory requests
 cmd_memory_requests() {
     echo "--------------------------------------------------------------------------"
-    
+
     kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[].resources.requests.cpu}{"\t"}{.spec.containers[].resources.requests.memory}{"\n"}{end}' 2>/dev/null | \
         awk '
         BEGIN {
@@ -127,24 +127,24 @@ cmd_memory_requests() {
             found = 0
         }
         /^[[:space:]]*$/ { next }  # Skip empty lines
-        
+
         {
             # Split line into fields by tab
             split($0, fields, "\t")
-            
+
             if (length(fields[1]) > 0) {
                 found = 1
                 pods[++count] = fields[1]
                 cpus[count] = (fields[2] == "" ? "N/A" : fields[2])
                 mems[count] = (fields[3] == "" ? "N/A" : fields[3])
-                
+
                 # Update maximum lengths
                 pod_len = length(fields[1])
                 if (pod_len > max_pod_len) max_pod_len = pod_len
-                
+
                 cpu_len = length(fields[2] == "" ? "N/A" : fields[2])
                 if (cpu_len > max_cpu_len) max_cpu_len = cpu_len
-                
+
                 mem_len = length(fields[3] == "" ? "N/A" : fields[3])
                 if (mem_len > max_mem_len) max_mem_len = mem_len
             }
@@ -154,11 +154,11 @@ cmd_memory_requests() {
                 print "No pods found or error retrieving data"
                 exit
             }
-            
+
             # Print header
-            printf "%-" max_pod_len "s  %-" max_cpu_len "s  %-"max_mem_len "s\n", 
+            printf "%-" max_pod_len "s  %-" max_cpu_len "s  %-"max_mem_len "s\n",
                    "Pod Name", "CPU", "Memory"
-            
+
             # Print separator line
             sep = ""
             for (i = 1; i <= max_pod_len; i++) sep = sep "-"
@@ -167,10 +167,10 @@ cmd_memory_requests() {
             sep = sep "  "
             for (i = 1; i <= max_mem_len; i++) sep = sep "-"
             print sep
-            
+
             # Print data with proper alignment
             for (i = 1; i <= count; i++) {
-                printf "%-" max_pod_len "s  %-" max_cpu_len "s  %s\n", 
+                printf "%-" max_pod_len "s  %-" max_cpu_len "s  %s\n",
                        pods[i], cpus[i], mems[i]
             }
         }'

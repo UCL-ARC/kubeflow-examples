@@ -154,9 +154,9 @@ Pods with CPU Requests:
 ---------------------------------------------------------------------------------------------------
 Pod Name                                          Container                          CPU (millicores)
 ------------------------------------------------  ---------------------------------  ----------------
-checkpointed-training-workflow-01-0               checkpointed-training-workflow-01  2               
-ml-pipeline-ui-artifact-55894b5986-xnmmg          ml-pipeline-ui-artifact            10m             
-ml-pipeline-visualizationserver-847879f7bb-lgfjd  ml-pipeline-visualizationserver    50m             
+checkpointed-training-workflow-01-0               checkpointed-training-workflow-01  2
+ml-pipeline-ui-artifact-55894b5986-xnmmg          ml-pipeline-ui-artifact            10m
+ml-pipeline-visualizationserver-847879f7bb-lgfjd  ml-pipeline-visualizationserver    50m
 
 Pod Resource for Memory Requests:
 --------------------------------------------------------------------------
@@ -171,23 +171,23 @@ Show quota summary:
 GPU Quota: dev-shared
 Pending: 1 | Admitted: 3
 -----------------------------------------------------------
-RESOURCE (Flavor: a100-80gb-nvlink) NOMINAL QUOTA  
+RESOURCE (Flavor: a100-80gb-nvlink) NOMINAL QUOTA
 ----------------------------------- ---------------
-cpu                                 48             
-ephemeral-storage                   1000Gi         
-nvidia.com/gpu                      8              
-memory                              1000Gi         
-pods                                110            
+cpu                                 48
+ephemeral-storage                   1000Gi
+nvidia.com/gpu                      8
+memory                              1000Gi
+pods                                110
 
 Show workloads with Flavors Reservation and Usage:
 ---------------------------------------------------------------------------------------
-RESOURCE                  RESERVED (default)             USED (default)                
+RESOURCE                  RESERVED (default)             USED (default)
 ------------------------  ------------------------------ ------------------------------
-cpu                       2360m                          2360m                         
-pods                      3                              3                             
-ephemeral-storage         16860Mi                        16860Mi                       
-nvidia.com/gpu            0                              0                             
-memory                    4750Mi                         4750Mi                        
+cpu                       2360m                          2360m
+pods                      3                              3
+ephemeral-storage         16860Mi                        16860Mi
+nvidia.com/gpu            0                              0
+memory                    4750Mi                         4750Mi
 ```
 
 
