@@ -28,4 +28,3 @@ It mainly depends on three things: the number of model parameters, the size of t
 This function trains a convolutional neural network on the Fashion-MNIST dataset using PyTorch with optional distributed training. It sets up a distributed environment, builds a simple CNN model, and trains it over several epochs on a subset of the dataset. During training, checkpoints containing the model and optimiser state are saved at regular intervals using an atomic save method to ensure reliability on shared or Kubernetes storage. The function also supports resuming training from a saved checkpoint and ensures that only the main process handles dataset downloads and checkpoint writing.
 
 See the example [mnist-checkpoints-fundamentals.ipynb](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/checkpoints-fundamentals/mnist-checkpoints-fundamentals.ipynb).
-
