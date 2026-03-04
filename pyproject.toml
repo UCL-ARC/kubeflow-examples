@@ -7,10 +7,6 @@ dependencies = [
     "mkdocs-nav-weight",
     "jupyter",
     "notebook",
-]
-
-[dependency-groups]
-dev = [
     "pre-commit",
     "ruff",
 ]

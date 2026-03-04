@@ -6,4 +6,4 @@ weight: 2
 
 ## add Section
 
-add details 
+add details
