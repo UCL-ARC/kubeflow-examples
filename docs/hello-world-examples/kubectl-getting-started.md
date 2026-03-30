@@ -108,89 +108,86 @@ We provide a Pod Information Script, [`pod-info.sh`](https://github.com/ucl-arc-
 
 * View the help menu:
 ```bash
-bash pod-info.sh --help
+bash kpodinfo.sh --help
 ```
 
 * Help output:
 ```text
 Pod Information Script - Simplified kubectl queries
 
-Usage: pod-info.sh [OPTIONS] COMMAND
+Usage: kpodinfo.sh [OPTIONS] COMMAND
 
 Options:
   -h, --help                  Show this help message
 
 Commands:
   cpu-requests                Show pod names with CPU requests
-  resources                   Show pod names with CPU and memory requests
+  memory-requests             Show pod names with CPU and memory requests
+  quota-summary               Show Quota Summary
   flavors                     Show Flavors Reservation and Usage
   all-info                    Show detailed pod information
 
 Examples:
-  pod-info.sh cpu-requests
-  pod-info.sh resources
+  kpodinfo.sh cpu-requests
+  kpodinfo.sh memory-requests
 ```
 
 **Example: Get detailed pod information for your namespace**
 
-Run this [mnist](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/hello-world-mnist/mnist.ipynb) jupyter notebook and after the cell for checking job status directly, you can run `bash pod-info.sh all-info`
+Run this [mnist](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/hello-world-mnist/mnist.ipynb) jupyter notebook and after the cell for checking job status directly, you can run `bash kpodinfo.sh all-info`
 
 ```bash
-bash pod-info.sh all-info
+bash kpodinfo.sh all-info
 ```
 
 Sample output
 ```text
 === All Pod Information ===
 
-1. Basic Pod Status:
+Basic Pod Status:
 NAME                                               READY   STATUS    RESTARTS   AGE
-ml-pipeline-ui-artifact-55894b5986-xnmmg           2/2     Running   0          24h
-ml-pipeline-visualizationserver-847879f7bb-lgfjd   2/2     Running   0          2d3h
-mx-notebook-06-0                                   2/2     Running   0          23h
-v54b375a0eb1-node-0-0-gf89q                        1/1     Running   0          4s
-v54b375a0eb1-node-0-1-csg8z                        1/1     Running   0          4s
-v54b375a0eb1-node-0-2-8v9qj                        1/1     Running   0          4s
-v54b375a0eb1-node-0-3-qfq2w                        1/1     Running   0          3s
-v54b375a0eb1-node-0-4-9t9dr                        1/1     Running   0          3s
+checkpointed-training-workflow-01-0                2/2     Running   0          91s
+ml-pipeline-ui-artifact-55894b5986-xnmmg           2/2     Running   0          10d
+ml-pipeline-visualizationserver-847879f7bb-lgfjd   2/2     Running   0          11d
 
-2. Pods with CPU Requests:
-=== Pod CPU Requests ===
-Pod Name	per-container:Number of CPUs Requested
---------------------------------
-ml-pipeline-ui-artifact-55894b5986-xnmmg          ml-pipeline-ui-artifact:10m
-ml-pipeline-visualizationserver-847879f7bb-lgfjd  ml-pipeline-visualizationserver:50m
-mx-notebook-06-0                                  mx-notebook-06:2
-v54b375a0eb1-node-0-0-gf89q                       node:5
-v54b375a0eb1-node-0-1-csg8z                       node:5
-v54b375a0eb1-node-0-2-8v9qj                       node:5
-v54b375a0eb1-node-0-3-qfq2w                       node:5
-v54b375a0eb1-node-0-4-9t9dr                       node:5
+Pods with CPU Requests:
+---------------------------------------------------------------------------------------------------
+Pod Name                                          Container                          CPU (millicores)
+------------------------------------------------  ---------------------------------  ----------------
+checkpointed-training-workflow-01-0               checkpointed-training-workflow-01  2
+ml-pipeline-ui-artifact-55894b5986-xnmmg          ml-pipeline-ui-artifact            10m
+ml-pipeline-visualizationserver-847879f7bb-lgfjd  ml-pipeline-visualizationserver    50m
 
-3. Pod Resource Requests:
-=== Pod Resource Requests ===
-Pod Name	CPU	Memory
-----------------------------------------
-ml-pipeline-ui-artifact-55894b5986-xnmmg          10m  70Mi
-ml-pipeline-visualizationserver-847879f7bb-lgfjd  50m  200Mi
-mx-notebook-06-0                                  2    4Gi
-v54b375a0eb1-node-0-0-gf89q                       5    2Gi
-v54b375a0eb1-node-0-1-csg8z                       5    2Gi
-v54b375a0eb1-node-0-2-8v9qj                       5    2Gi
-v54b375a0eb1-node-0-3-qfq2w                       5    2Gi
-v54b375a0eb1-node-0-4-9t9dr                       5    2Gi
+Pod Resource for Memory Requests:
+--------------------------------------------------------------------------
+Pod Name                                          CPU               Memory
+------------------------------------------------  ----------------  ------
+checkpointed-training-workflow-01-0               2                 4Gi
+ml-pipeline-ui-artifact-55894b5986-xnmmg          10m               70Mi
+ml-pipeline-visualizationserver-847879f7bb-lgfjd  50m               200Mi
 
-4. Show workloads with Flavors Reservation and Usage:
-=== Flavors Reservation and Usage ===
-Flavor	Total
+Show quota summary:
+-----------------------------------------------------------
+GPU Quota: dev-shared
+Pending: 1 | Admitted: 3
+-----------------------------------------------------------
+RESOURCE (Flavor: a100-80gb-nvlink) NOMINAL QUOTA
+----------------------------------- ---------------
+cpu                                 48
+ephemeral-storage                   1000Gi
+nvidia.com/gpu                      8
+memory                              1000Gi
+pods                                110
+
+Show workloads with Flavors Reservation and Usage:
 ---------------------------------------------------------------------------------------
-RESOURCE                  RESERVED (a100-80gb-nvlink)    USED (a100-80gb-nvlink)
+RESOURCE                  RESERVED (default)             USED (default)
 ------------------------  ------------------------------ ------------------------------
-cpu                       27360m                         27360m
-pods                      8                              8
-ephemeral-storage         42460Mi                        42460Mi
-nvidia.com/gpu            5                              5
-memory                    14990Mi                        14990Mi
+cpu                       2360m                          2360m
+pods                      3                              3
+ephemeral-storage         16860Mi                        16860Mi
+nvidia.com/gpu            0                              0
+memory                    4750Mi                         4750Mi
 ```
 
 
