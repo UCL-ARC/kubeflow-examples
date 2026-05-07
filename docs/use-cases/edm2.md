@@ -1,5 +1,5 @@
 ---
-title: Training Elucidating Diffusion Models 2 (edm2) to generate syntethic fetal images
+title: Kubeflow Trainer - Elucidating Diffusion Models 2 (edm2) to generate syntethic ultrasound fetal images
 description:
 weight: 2
 ---
@@ -37,13 +37,13 @@ wget -4 -O diffusion_pytorch_model.safetensors https://huggingface.co/stabilitya
 
 ## (Optional) Build Custom Docker Image
 
-Build Dockerfile container using [Dockerfile](../../usecase-edm2/Dockerfile) and push container images to GHCR (see explicit steps [here](https://github.com/xfetus/fetal-ultrasound-edm2/tree/main/ghcr)).
+Build Dockerfile container using [Dockerfile](../../kubeflow-trainer-usecases/edm2/Dockerfile) and push container images to GHCR (see explicit steps [here](https://github.com/xfetus/fetal-ultrasound-edm2/tree/main/ghcr)).
 
 Reference for [GHCR package fetal-ultrasound-edm2/fetal-ultrasound-edm2-distributed-learning](https://github.com/orgs/xfetus/packages/container/package/fetal-ultrasound-edm2%2Ffetal-ultrasound-edm2-distributed-learning)
 
 ## Configure Training Resources
 
-Open the notebook [`training-edm2-model-pipeline.ipynb`](../../usecase-edm2/training-edm2-model-pipeline.ipynb) 
+Open the notebook [`training-edm2-model-ghcr.ipynb`](../../kubeflow-trainer-usecases/edm2/training-edm2-model-ghcr.ipynb)
 
 
 Set your compute resources:
@@ -68,10 +68,10 @@ RESOURCES_PER_NODE = {
 
 ```bash
 # it displays only index in the val dataset and use `docker.io/pytorch/pytorch:2.7.1-cuda12.8-cudnn9-devel`
-GITHUB_CONTAINER_REGISTRY = "ghcr.io/xfetus/fetal-ultrasound-edm2/fetal-ultrasound-edm2-distributed-learning:v0.0.8" 
+GITHUB_CONTAINER_REGISTRY = "ghcr.io/xfetus/fetal-ultrasound-edm2/fetal-ultrasound-edm2-distributed-learning:v0.0.8"
 ```
 
-* Setting up torchrun 
+* Setting up torchrun
 
 ```bash
 command = TrainerCommand(
@@ -95,7 +95,7 @@ command = TrainerCommand(
 
 ## Models
 
-Models, logs and stats will be saved at `~/scratch-volume/FETAL_PLANES_DB/OUTPUT_DIRECTORY`: 
+Models, logs and stats will be saved at `~/scratch-volume/FETAL_PLANES_DB/OUTPUT_DIRECTORY`:
 
 ```bash
 ├── [1.7M]  log.txt
@@ -121,4 +121,3 @@ Ensure dataset is extracted to:
 ## References
 * Karras, Tero, Miika Aittala, Jaakko Lehtinen, Janne Hellsten, Timo Aila, and Samuli Laine. "Analyzing and improving the training dynamics of diffusion models." In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, pp. 24174-24184. 2024. https://arxiv.org/abs/2312.02696
 * Karras, Tero, Miika Aittala, Timo Aila, and Samuli Laine. "Elucidating the design space of diffusion-based generative models." Advances in neural information processing systems 35 (2022): 26565-26577. https://arxiv.org/abs/2206.00364
-
