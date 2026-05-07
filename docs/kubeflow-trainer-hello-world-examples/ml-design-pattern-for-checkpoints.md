@@ -52,7 +52,7 @@ Only the main process writes to disk, ensuring consistency.
 ### Getting Started
 
 1. Open the Example Notebook
-Check out the [mnist-checkpoints-fundamentals.ipynb](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/blob/main/checkpoints-fundamentals/mnist-checkpoints-fundamentals.ipynb) notebook for a fully worked example.
+Check out the [kubeflow-trainer-checkpoints-fundamentals](https://github.com/ucl-arc-unified-ai//kubeflow-examples/tree/main/kubeflow-trainer-checkpoints-fundamentals/mnist-checkpoints-fundamentals.ipynb) notebook for a fully worked example.
 
 2. Set Up Your Environment. Launch a new notebook using Kubeflow. Attach the existing volume scratch-volume/ in the Data Volumes section to store checkpoints and intermediate results.
 
