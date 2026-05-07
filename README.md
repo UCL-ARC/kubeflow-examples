@@ -1,6 +1,7 @@
-# Kubeflow examples
+# Kubeflow Examples in Unified AI
 
-A collection of Python scripts, projects, and Jupyter notebooks demonstrating how to build, train, and deploy machine learning models using Kubeflowl, the foundation of tools for AI platforms on Kubernetes within Unified-AI.
+A collection of Python scripts, Jupyter notebooks, Dockerfiles, and reproducible use cases demonstrating how to build, train, and deploy machine learning models using [Kubeflow](https://www.kubeflow.org/), the foundational AI tooling stack on Kubernetes within Unified AI.
+
 
 ## Building documentation locally
 

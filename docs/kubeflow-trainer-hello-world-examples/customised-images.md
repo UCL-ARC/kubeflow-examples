@@ -78,7 +78,7 @@ qdocker system prune -f --volumes # free up disk space
 ```
 
 ## Example that connects to Unified-AI Kubeflow
-Once you build your customised image with the files [hello-world-customised-images](https://github.com/ucl-arc-environments/kubeflow-trainer-examples/tree/main/hello-world-customised-images), you will connect to Unified-AI platform with the following steps:
+Once you build your customised image with the files [kubeflow-trainer-hello-world-customised-images](https://github.com/ucl-arc-unified-ai//kubeflow-examples/tree/main/kubeflow-trainer-hello-world-customised-images), you will connect to Unified-AI platform with the following steps:
 
 1. Connect to VPN to access https://kubeflow.arc-unified-ai.condenser.arc.ucl.ac.uk
 2. Create new Unified-AI notebook (as shown in `quickstart-mnist` section) or connect to an already created namespace
