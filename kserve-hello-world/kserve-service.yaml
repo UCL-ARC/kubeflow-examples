@@ -1,0 +1,26 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  annotations:
+    sidecar.istio.io/inject: "false"
+  name: huggingface-flan-t5-large
+spec:
+  predictor:
+    model:
+      args:
+      - --model_name=flan-t5-large
+      - --model_dir=/mnt/models
+      modelFormat:
+        name: huggingface
+      resources:
+        limits:
+          cpu: "6"
+          memory: 18Gi
+          nvidia.com/gpu: "0"
+          ephemeral-storage: 20Gi
+        requests:
+          cpu: "6"
+          memory: 18Gi
+          nvidia.com/gpu: "0"
+          ephemeral-storage: 20Gi
+      storageUri: hf://google/flan-t5-large
