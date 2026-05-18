@@ -22,6 +22,7 @@ spec:
     - name: VLLM_CONFIG_ROOT
       value: "/tmp"
     image: ghcr.io/mxochicale/kserve-vllm/unified-ai-kserve-vllm:v0.0.0
+    # image: ghcr.io/ucl-arc-environments/unified-ai-kserve-vllm-transformer:v1.0.1
     name: kserve-container
     command: [vllm, serve]
     ports:
@@ -65,7 +66,7 @@ spec:
         - ALL
       privileged: false
       runAsNonRoot: true
-      runAsUser: 1000  
+      # runAsUser: <user_uid>  
     volumeMounts:
     - mountPath: /dev/shm
       name: shm 

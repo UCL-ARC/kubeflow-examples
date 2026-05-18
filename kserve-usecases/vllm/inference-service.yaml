@@ -24,4 +24,4 @@ spec:
           nvidia.com/gpu: "1"
           ephemeral-storage: 20Gi
       runtime: kserve-vllm
-      storageUri: "pvc://scratch-volume"
+      storageUri: "pvc://scratch-volume/models/gpt-oss-20b/original"
