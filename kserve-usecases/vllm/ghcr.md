@@ -3,7 +3,7 @@
 * Build Dockerfile container
 ```bash
 IMAGENAME=unified-ai-kserve-vllm
-VERSION_ID=v0.0.0
+VERSION_ID=v0.0.1
 docker build -t ${IMAGENAME}:${VERSION_ID} -f Dockerfile .
 ```
 
@@ -17,11 +17,10 @@ docker tag ${IMAGENAME}:${VERSION_ID} ghcr.io/${GITHUB_ORG}/${PROJECT_NAME}/${IM
 
 * See an example of output logs for the command `docker images`:
 ```bash
-#docker images
 $ docker images
-REPOSITORY                                                                        TAG       IMAGE ID       CREATED          SIZE
-unified-ai-kserve-vllm                                                            v0.0.0    6ee3472a965a   50 seconds ago   24.8GB
-ghcr.io/mxochicale/kserve-vllm/unified-ai-kserve-vllm                             v0.0.0    6ee3472a965a   50 seconds ago   24.8GB
+REPOSITORY                                                            TAG       IMAGE ID       CREATED         SIZE
+ghcr.io/mxochicale/kserve-vllm/unified-ai-kserve-vllm                 v0.0.1    920022d3b69f   5 minutes ago   25.9GB
+unified-ai-kserve-vllm                                                v0.0.1    920022d3b69f   5 minutes ago   25.9GB
 ```
 
 * Authenticating with a personal access token (classic)
