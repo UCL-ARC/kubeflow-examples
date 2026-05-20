@@ -24,6 +24,7 @@ kubectl apply -f inference-service.yaml
 ```bash
 kubectl get inferenceservice
 kubectl describe inferenceservice zai-org-glm-47-vllm
+kubectl delete inferenceservice zai-org-glm-47-vllm
 ```
 
 
