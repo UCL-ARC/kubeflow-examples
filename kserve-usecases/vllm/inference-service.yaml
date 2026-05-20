@@ -9,7 +9,7 @@ spec:
   predictor:
     model:
       args:
-      - "/mnt/models/gpt-oss-20b" 
+      - "/mnt/models/models/gpt-oss-20b/original" 
       modelFormat:
         name: vllm 
       resources:
@@ -24,4 +24,4 @@ spec:
           nvidia.com/gpu: "1"
           ephemeral-storage: 20Gi
       runtime: kserve-vllm
-      storageUri: "pvc://scratch-volume/models/gpt-oss-20b/original"
+      storageUri: "pvc://scratch-volume"
