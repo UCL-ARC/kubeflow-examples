@@ -157,6 +157,24 @@ Ensure dataset is extracted to:
 ~/scratch-volume/FETAL_PLANES_DB
 ```
 
+* Use `kpodinfo` for pod information as a simplified kubectl queries
+
+```bash
+$ kpodinfo --help
+
+Usage: /usr/local/bin/kpodinfo [OPTIONS] COMMAND
+
+Options:
+  -h, --help                  Show this help message
+
+Commands:
+  cpu-requests                Show pod names with CPU requests
+  memory-requests             Show pod names with CPU and memory requests
+  quota-summary               Show Quota Summary
+  flavors                     Show Flavors Reservation and Usage
+  all-info                    Show detailed pod information
+```
+
 ## References
 * Karras, Tero, Miika Aittala, Jaakko Lehtinen, Janne Hellsten, Timo Aila, and Samuli Laine. "Analyzing and improving the training dynamics of diffusion models." In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, pp. 24174-24184. 2024. https://arxiv.org/abs/2312.02696
 * Karras, Tero, Miika Aittala, Timo Aila, and Samuli Laine. "Elucidating the design space of diffusion-based generative models." Advances in neural information processing systems 35 (2022): 26565-26577. https://arxiv.org/abs/2206.00364
