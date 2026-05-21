@@ -66,6 +66,8 @@ print(HUGGINGFACE_URL)
 # http://huggingface-flan-t5-large.kubeflow-${USERNAME}.svc.cluster.local/
 ```
 
+You can also go to the Unified-AI API under KServe Endpoints and use the "Copy" option to copy the endpoint URL (e.g. `http://huggingface-flan-t5-large.kubeflow-${USERNAME}.svc.cluster.local/`)
+
 Test model inference
 ```python
 import requests
