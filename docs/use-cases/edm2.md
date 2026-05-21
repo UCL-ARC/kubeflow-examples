@@ -37,7 +37,7 @@ wget -4 -O diffusion_pytorch_model.safetensors https://huggingface.co/stabilitya
 
 ## (Optional) Build Custom Docker Image
 
-Build Dockerfile container using [Dockerfile](../../kubeflow-trainer-usecases/edm2/Dockerfile) and push container images to GHCR (see explicit steps [here](https://github.com/xfetus/fetal-ultrasound-edm2/tree/main/ghcr)).
+Build Dockerfile container using either [Dockerfile](../../kubeflow-trainer-usecases/edm2/Dockerfile) or [Dockerfile-scratch-volume](../../kubeflow-trainer-usecases/edm2/Dockerfile-scratch-volume) and push container images to GHCR (see explicit steps [here](https://github.com/xfetus/fetal-ultrasound-edm2/blob/main/unified-ai/GHCR.md)).
 
 Reference for [GHCR package fetal-ultrasound-edm2/fetal-ultrasound-edm2-distributed-learning](https://github.com/orgs/xfetus/packages/container/package/fetal-ultrasound-edm2%2Ffetal-ultrasound-edm2-distributed-learning)
 
