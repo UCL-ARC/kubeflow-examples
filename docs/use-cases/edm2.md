@@ -71,7 +71,7 @@ RESOURCES_PER_NODE = {
 GITHUB_CONTAINER_REGISTRY = "ghcr.io/xfetus/fetal-ultrasound-edm2/fetal-ultrasound-edm2-distributed-learning:v0.0.8"
 ```
 
-* Setting up torchrun
+* Setting up torchrun with all dependendencies in the customimsed image (see full notebook [here](https://github.com/xfetus/fetal-ultrasound-edm2/blob/main/unified-ai/training-edm2-model-ghcr.ipynb))
 
 ```bash
 command = TrainerCommand(
@@ -83,8 +83,8 @@ command = TrainerCommand(
         # f"--master_addr={MASTER_ADDR}", #DO WE NEED PASS THIS?
         # f"--master_port={MASTER_PORT}", #DO WE NEED PASS THIS?
         "train_edm2.py",
-        "--outdir", "/scratch-volume/FETAL_PLANES_DB/OUTPUT_DIRECTORY",
-        "--data", "/scratch-volume/FETAL_PLANES_DB",
+        "--outdir", "/scratch-volume/FETAL_PLANES_DB/OUTPUT_DIRECTORY", #pragma: allowlist secret
+        "--data", "/scratch-volume/FETAL_PLANES_DB", #pragma: allowlist secret
         "--batch", "4",
         "--preset", "edm2-img512-s",
         "--batch-gpu", "4",
@@ -92,6 +92,45 @@ command = TrainerCommand(
 )
 ```
 
+
+* Setting up torchrun with all dependendencies in the customimsed image using the scratch-volume (see full notebook [here](https://github.com/xfetus/fetal-ultrasound-edm2/blob/main/unified-ai/training-edm2-model-scratch-volume.ipynb))
+
+```bash
+command = TrainerCommand(
+    command=[
+        "bash", "-c",
+        (
+            # Create writable dirs
+            "mkdir -p /scratch-volume/pip-packages "
+            "/scratch-volume/torch-inductor-cache "
+            "/scratch-volume/home && "
+            # Install deps exclude torch/torchvision (already in base image)
+            # Use --upgrade to overwrite stale packages from previous runs
+            "pip install "
+            "pandas "
+            "accelerate "
+            "basicsr "
+            "diffusers "
+            "einops "
+            "scikit-learn "
+            "--target=/scratch-volume/pip-packages "
+            "--upgrade "
+            "--no-cache-dir "
+            "--quiet && "
+            # Set cache env vars inline to guarantee they're set before torchrun
+            "export HOME=/scratch-volume/home && "
+            "export TORCHINDUCTOR_CACHE_DIR=/scratch-volume/torch-inductor-cache && "
+            "export PYTHONPATH=/scratch-volume/pip-packages:$PYTHONPATH && "
+            "torchrun /scratch-volume/fetal-ultrasound-edm2/train_edm2.py "
+            "--outdir /scratch-volume/FETAL_PLANES_DB/OUTPUT_DIRECTORY "
+            "--data /scratch-volume/FETAL_PLANES_DB "
+            "--batch 4 "
+            "--preset edm2-img512-s "
+            "--batch-gpu 4"
+        )
+    ]
+)
+```
 
 ## Models
 
