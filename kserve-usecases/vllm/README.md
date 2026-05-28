@@ -13,11 +13,11 @@ hf download openai/gpt-oss-20b --include "original/*" --local-dir gpt-oss-20b/
 
 ## Starting services
 ```bash
-kubectl apply -f serving-runtime.yaml
+kubectl apply -f kserve-usecases/vllm/serving-runtime.yaml
 ```
 
 ```bash
-kubectl apply -f inference-service.yaml
+kubectl apply -f kserve-usecases/vllm/inference-service.yaml
 ```
 
 ## Managing services
