@@ -33,6 +33,8 @@ kubectl apply -f kserve-usecases/vllm/inference-service.yaml
 kubectl get inferenceservice
 kubectl describe inferenceservice zai-org-glm-47-vllm
 kubectl delete inferenceservice zai-org-glm-47-vllm
+kubectl get pods
+kubectl describe pod zai-org-glm-47-vllm-predictor-00001-deployment
 ```
 
 
