@@ -7,16 +7,31 @@ cd $HOME/scratch-volume && mkdir -p models && cd models
 pip install -U "huggingface_hub[cli]"
 export PATH="$HOME/.local/bin:$PATH"
 # hf auth login (optional)
-hf download openai/gpt-oss-20b --include "original/*" --local-dir gpt-oss-20b/
-# Download complete: : 13.8GB [00:58, 234MB/s]
+hf download openai/gpt-oss-20b --local-dir gpt-oss-20b/ --max-workers 1
+# Download complete: 100%, 41.3G/41.3G [02:20<00:00, 294MB/s]
 ```
 
 * logs (for reference and to be removed)
 ```bash
-(base) jovyan@kvserve-llm-v01-0:~/scratch-volume/models/gpt-oss-20b/original$ ls -la
--rw-r--r--. 1 jovyan nfs-group-10320         376 May 28 19:26 config.json
--rw-r--r--. 1 jovyan nfs-group-10320       13082 May 28 19:26 dtypes.json
--rw-r--r--. 1 jovyan nfs-group-10320 13761300984 May 28 19:28 model.safetensors
+(base) jovyan@kvserve-llm-v01-0:~/scratch-volume/models/gpt-oss-20b$ ls -la
+
+-rwxr-xr-x. 1       16738 Jun  1 11:41 chat_template.jinja
+-rwxr-xr-x. 1        1806 Jun  1 11:41 config.json
+-rwxr-xr-x. 1         177 Jun  1 11:41 generation_config.json
+-rwxr-xr-x. 1        1570 Jun  1 11:41 .gitattributes
+drwxr-sr-x. 2        4096 Jun  1 11:47 .ipynb_checkpoints
+-rwxr-xr-x. 1       11357 Jun  1 11:41 LICENSE
+drwxr-sr-x. 2        4096 Jun  1 11:42 metal
+-rwxr-xr-x. 1  4792272488 Jun  1 11:42 model-00000-of-00002.safetensors
+-rwxr-xr-x. 1  4798702184 Jun  1 11:42 model-00001-of-00002.safetensors
+-rwxr-xr-x. 1  4170342232 Jun  1 11:42 model-00002-of-00002.safetensors
+-rwxr-xr-x. 1       36355 Jun  1 11:42 model.safetensors.index.json
+drwxr-sr-x. 2        4096 Jun  1 11:43 original
+-rwxr-xr-x. 1        7095 Jun  1 11:41 README.md
+-rwxr-xr-x. 1          98 Jun  1 11:43 special_tokens_map.json
+-rwxr-xr-x. 1        4200 Jun  1 11:43 tokenizer_config.json
+-rwxr-xr-x. 1    27868174 Jun  1 11:43 tokenizer.json
+-rwxr-xr-x. 1         200 Jun  1 11:41 USAGE_POLICY
 ```
 
 ## Starting services
