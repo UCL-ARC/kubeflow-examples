@@ -1,7 +1,7 @@
 ---
 title: Kubeflow Trainer - Elucidating Diffusion Models 2 (edm2) to generate syntethic ultrasound fetal images
 description:
-weight: 2
+weight: 1
 ---
 
 This guide walks you through setting up your unified-ai environment, downloading data, and training an EDM2 model to generate synthetic fetal ultrasound images.
