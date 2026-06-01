@@ -46,15 +46,15 @@ kubectl apply -f kserve-usecases/vllm/inference-service.yaml
 ```
 
 ## End-point
-http://zai-org-glm-47-vllm.kubeflow-${USERNAME}.svc.cluster.local
+http:/gpt-oss-20b-vllm.kubeflow-${USERNAME}.svc.cluster.local
 
 ## Managing services
 ```bash
 kubectl get inferenceservice
-kubectl describe inferenceservice zai-org-glm-47-vllm
-kubectl delete inferenceservice zai-org-glm-47-vllm
+kubectl describe inferenceservice gpt-oss-20b-vllm
+kubectl delete inferenceservice gpt-oss-20b-vllm
 kubectl get pods
-kubectl describe pod zai-org-glm-47-vllm-predictor-00001-deployment
+kubectl describe pod gpt-oss-20b-vllm-predictor-00001-deployment
 ```
 
 

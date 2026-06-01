@@ -4,7 +4,7 @@ metadata:
   annotations:
     sidecar.istio.io/inject: "false"
     serving.kserve.io/enable-prometheus-scraping: "true"
-  name: zai-org-glm-47-vllm
+  name: gpt-oss-20b
 spec:
   predictor:
     model:
