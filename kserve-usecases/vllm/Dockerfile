@@ -1,7 +1,8 @@
 FROM vllm/vllm-openai:nightly
 
-RUN apt update
-RUN apt install -y git
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends git \
+ && rm -rf /var/lib/apt/lists/*
 
 RUN uv pip install --system git+https://github.com/huggingface/transformers.git
 
