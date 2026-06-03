@@ -67,13 +67,13 @@ You can then use the following commands to inspect and manage the deployment:
 
 ```bash
 kubectl get inferenceservice
-kubectl describe inferenceservice gpt-oss-20b-vllm
+kubectl describe inferenceservice gpt-oss-20b
 ```
 
 ## 3. Service Endpoint
 
 The inference service is accessible at:
-http://gpt-oss-20b-vllm.kubeflow-${USERNAME}.svc.cluster.local
+http://gpt-oss-20b.kubeflow-${USERNAME}.svc.cluster.local
 
 
 ## 4. Send Requests
@@ -86,12 +86,12 @@ A complete working example is available in [hello-world-gpt-oss-20b.ipynb](../..
 import requests
 
 # 1. Resolve the inference service URL
-result = !kubectl get inferenceservices gpt-oss-20b-vllm \
+result = !kubectl get inferenceservices gpt-oss-20b \
     -o jsonpath='{.status.address.url}'
 
 HOSTED_VLLM_API_BASE = result[0].strip()
 print(f"Service URL: {HOSTED_VLLM_API_BASE}")
-# e.g. http://gpt-oss-20b-vllm.kubeflow-${USERNAME}.svc.cluster.local
+# e.g. http://gpt-oss-20b.kubeflow-${USERNAME}.svc.cluster.local
 ```
 
 ### Call the API and display the result
@@ -127,7 +127,7 @@ Common `kubectl` commands for inspecting the deployment:
 | Command | Purpose |
 |---|---|
 | `kubectl get inferenceservice` | List all inference services |
-| `kubectl describe inferenceservice gpt-oss-20b-vllm` | Inspect the service |
-| `kubectl delete inferenceservice gpt-oss-20b-vllm` | Remove the service |
+| `kubectl describe inferenceservice gpt-oss-20b` | Inspect the service |
+| `kubectl delete inferenceservice gpt-oss-20b` | Remove the service |
 | `kubectl get pods` | List pods |
-| `kubectl describe pod gpt-oss-20b-vllm-predictor-00001-deployment` | Inspect a pod |
+| `kubectl describe pod gpt-oss-20b-predictor-00001-deployment` | Inspect a pod |
