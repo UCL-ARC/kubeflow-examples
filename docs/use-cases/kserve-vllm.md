@@ -8,14 +8,14 @@ This guide walks you through setting up a unified-ai environment for generative 
 
 ## Prerequisites
 
-Before starting, create a new Unified AI Notebook. 
+Before starting, create a new Unified AI Notebook.
 Under **Data Volumes**, select `scratch-volume`, this is required for storing datasets, models, and outputs.
 
 ## 1. Download openai/gpt-oss-20b
 
 Navigate to your scratch volume and download the model.
 
-You may experience crashes due to concurrency issues; if so, use `--max-workers 1`. 
+You may experience crashes due to concurrency issues; if so, use `--max-workers 1`.
 We recommend starting the process and running it until the model download completes.
 
 ```bash
@@ -83,31 +83,46 @@ A complete working example is available in [hello-world-gpt-oss-20b.ipynb](../..
 ### Get the inference service URL
 
 ```python
+import requests
+
+# 1. Resolve the inference service URL
 result = !kubectl get inferenceservices gpt-oss-20b-vllm \
     -o jsonpath='{.status.address.url}'
 
 HOSTED_VLLM_API_BASE = result[0].strip()
-print(HOSTED_VLLM_API_BASE)
-# http://gpt-oss-20b-vllm.kubeflow-${USERNAME}.svc.cluster.local
+print(f"Service URL: {HOSTED_VLLM_API_BASE}")
+# e.g. http://gpt-oss-20b-vllm.kubeflow-${USERNAME}.svc.cluster.local
 ```
 
-### Call the API
-
+### Call the API and display the result
 ```python
-import requests
-
-api_endpoint = HOSTED_VLLM_API_BASE + "/v1/chat/completions"
+# 2. Build and send the chat-completion request
+API_ENDPOINT = f"{HOSTED_VLLM_API_BASE}/v1/chat/completions"
+MODEL_PATH    = "/mnt/models/models/gpt-oss-20b"
 
 payload = {
-    "model": "/mnt/models/models/gpt-oss-20b",
+    "model": MODEL_PATH,
     "messages": [
-        {"role": "user", "content": "Translate to Spanish: How old are you?"}
+        {
+            "role": "user",
+            "content": (
+                "Translate the following sentence into Portuguese, German, and Spanish.\n"
+                "Return each translation on a separate line, labelled by language.\n\n"
+                "Sentence: How old are you?"
+            ),
+        }
     ],
-    "max_tokens": 500
+    "max_tokens": 500,
+    "temperature": 0.2,   # low temp → consistent, literal translations
 }
 
-response = requests.post(api_endpoint, json=payload)
-print(response.json())
+response = requests.post(API_ENDPOINT, json=payload, timeout=60)
+response.raise_for_status()           # surface HTTP errors immediately
+
+# 3. Display the result
+data    = response.json()
+message = data["choices"][0]["message"]["content"]
+print(message)
 ```
 
 
@@ -122,4 +137,3 @@ Common `kubectl` commands for inspecting the deployment:
 | `kubectl delete inferenceservice gpt-oss-20b-vllm` | Remove the service |
 | `kubectl get pods` | List pods |
 | `kubectl describe pod gpt-oss-20b-vllm-predictor-00001-deployment` | Inspect a pod |
-

@@ -11,7 +11,7 @@ spec:
       args:
       - "/mnt/models/models/gpt-oss-20b"
       modelFormat:
-        name: vllm 
+        name: vllm
       resources:
         limits:
           cpu: "6"

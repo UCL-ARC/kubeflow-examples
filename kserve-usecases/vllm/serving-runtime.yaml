@@ -33,7 +33,7 @@ spec:
       failureThreshold: 200
       periodSeconds: 5
       successThreshold: 1
-      timeoutSeconds: 60 
+      timeoutSeconds: 60
     readinessProbe:
       httpGet:
         path: /health
@@ -65,11 +65,11 @@ spec:
         - ALL
       privileged: false
       runAsNonRoot: true
-      runAsUser: 1000  
+      runAsUser: 1000
     volumeMounts:
     - mountPath: /dev/shm
-      name: shm 
-  hostIPC: true 
+      name: shm
+  hostIPC: true
   supportedModelFormats:
   - name: vllm
     version: "1"
