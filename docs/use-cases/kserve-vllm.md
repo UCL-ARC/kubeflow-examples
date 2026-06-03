@@ -56,9 +56,18 @@ Apply the serving runtime and inference service manifests.
 
 We recommend using `cd` to navigate to the configuration directory at `kserve-usecases/vllm/`, and `cd ..` to return to the root repository path.
 
+You need to apply `serving-runtime.yaml` first, followed by `inference-service.yaml`.
+
 ```bash
 kubectl apply -f serving-runtime.yaml
 kubectl apply -f inference-service.yaml
+```
+
+You can then use the following commands to inspect and manage the deployment:
+
+```bash
+kubectl get inferenceservice
+kubectl describe inferenceservice gpt-oss-20b-vllm
 ```
 
 ## 3. Service Endpoint
