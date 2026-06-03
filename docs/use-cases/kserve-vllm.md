@@ -100,19 +100,15 @@ print(f"Service URL: {HOSTED_VLLM_API_BASE}")
 API_ENDPOINT = f"{HOSTED_VLLM_API_BASE}/v1/chat/completions"
 MODEL_PATH    = "/mnt/models/models/gpt-oss-20b"
 
+user_text = "Translate: hi, how are you?"
+
 payload = {
     "model": MODEL_PATH,
     "messages": [
-        {
-            "role": "user",
-            "content": (
-                "Translate the following sentence into Portuguese, German, and Spanish.\n"
-                "Return each translation on a separate line, labelled by language.\n\n"
-                "Sentence: How old are you?"
-            ),
-        }
+        {"role": "system", "content": "You are a multilingual translator. Translate user input into Portuguese, German, and Spanish."},
+        {"role": "user", "content": user_text},
     ],
-    "max_tokens": 500,
+    "max_tokens": 200,
     "temperature": 0.2,   # low temp → consistent, literal translations
 }
 
@@ -120,9 +116,7 @@ response = requests.post(API_ENDPOINT, json=payload, timeout=60)
 response.raise_for_status()           # surface HTTP errors immediately
 
 # 3. Display the result
-data    = response.json()
-message = data["choices"][0]["message"]["content"]
-print(message)
+print(response.json()["choices"][0]["message"]["content"])
 ```
 
 
