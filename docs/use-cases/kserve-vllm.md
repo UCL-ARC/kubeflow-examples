@@ -13,7 +13,10 @@ Under **Data Volumes**, select `scratch-volume`, this is required for storing da
 
 ## 1. Download openai/gpt-oss-20b
 
-Navigate to your scratch volume and download the model:
+Navigate to your scratch volume and download the model.
+
+You may experience crashes due to concurrency issues; if so, use `--max-workers 1`. 
+We recommend starting the process and running it until the model download completes.
 
 ```bash
 cd $HOME/scratch-volume && mkdir -p models && cd models
