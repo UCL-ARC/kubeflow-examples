@@ -111,9 +111,9 @@ print(response.json())
 ```
 
 
-## 5. Manage Services
+## 5. Inspect Services
 
-Common `kubectl` commands for managing the deployment:
+Common `kubectl` commands for inspecting the deployment:
 
 | Command | Purpose |
 |---|---|
@@ -121,6 +121,5 @@ Common `kubectl` commands for managing the deployment:
 | `kubectl describe inferenceservice gpt-oss-20b-vllm` | Inspect the service |
 | `kubectl delete inferenceservice gpt-oss-20b-vllm` | Remove the service |
 | `kubectl get pods` | List pods |
-| `kubectl describe pod gpt-oss-20b-vllm-predictor-00001-deployment` | Debug a pod |
-
+| `kubectl describe pod gpt-oss-20b-vllm-predictor-00001-deployment` | Inspect a pod |
 
