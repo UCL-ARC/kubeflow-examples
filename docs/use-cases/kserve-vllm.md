@@ -52,11 +52,13 @@ hf download openai/gpt-oss-20b --local-dir gpt-oss-20b/ --max-workers 1
 
 ## 2. Deploy Services
 
-Apply the serving runtime and inference service manifests:
+Apply the serving runtime and inference service manifests.
+
+We recommend using `cd` to navigate to the configuration directory at `kserve-usecases/vllm/`, and `cd ..` to return to the root repository path.
 
 ```bash
-kubectl apply -f kserve-usecases/vllm/serving-runtime.yaml
-kubectl apply -f kserve-usecases/vllm/inference-service.yaml
+kubectl apply -f serving-runtime.yaml
+kubectl apply -f inference-service.yaml
 ```
 
 ## 3. Service Endpoint
