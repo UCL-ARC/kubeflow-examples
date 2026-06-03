@@ -69,7 +69,7 @@ spec:
     volumeMounts:
     - mountPath: /dev/shm
       name: shm
-  hostIPC: true
+  hostIPC: false
   supportedModelFormats:
   - name: vllm
     version: "1"
