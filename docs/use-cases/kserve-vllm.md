@@ -124,6 +124,8 @@ Apply the serving runtime and inference service manifests.
 We recommend using `cd` to navigate to the configuration directory at `kserve-usecases/vllm/`, and `cd ..` to return to the root repository path.
 
 You need to apply `serving-runtime.yaml` first, followed by `inference-service.yaml`.
+Please note that the initial deployment may take some time, as the container image needs to be pulled onto the cluster. 
+Subsequent deployments will typically be much faster, as the image will already be cached on the node.
 
 ```bash
 kubectl apply -f serving-runtime.yaml
