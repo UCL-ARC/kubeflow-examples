@@ -9,7 +9,8 @@ spec:
   predictor:
     model:
       args:
-      - "/mnt/models/models/gpt-oss-20b"
+      - --model_dir=/mnt/models
+      - --model_name=models/gpt-oss-20b
       modelFormat:
         name: vllm
       resources:
