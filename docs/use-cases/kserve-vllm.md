@@ -13,7 +13,8 @@ Under **Data Volumes**, select `scratch-volume`, this is required for storing da
 
 ## 1. Download `openai/gpt-oss-20b` model
 
-Navigate to your scratch volume and download the model.
+Navigate to your scratch volume and download the model using the `hf` CLI. 
+Set `--local-dir` to the target download location and `--revision` to the commit hash of the required model version from the [huggingface.co/openai/gpt-oss-20b](https://huggingface.co/openai/gpt-oss-20b) repository.
 
 You may experience crashes due to concurrency issues; if so, use `--max-workers 1`.
 We recommend starting the process and running it until the model download completes.
@@ -22,7 +23,7 @@ We recommend starting the process and running it until the model download comple
 cd $HOME/scratch-volume && mkdir -p models && cd models
 pip install -U "huggingface_hub[cli]"
 export PATH="$HOME/.local/bin:$PATH"
-hf download openai/gpt-oss-20b --local-dir gpt-oss-20b/ --max-workers 1
+hf download openai/gpt-oss-20b --local-dir gpt-oss-20b/ --max-workers 1 --revision 6cee5e81ee83917806bbde320786a8fb61efebee #commited on Aug 26, 2025
 # Download complete: 100%, 41.3G/41.3G
 ```
 
