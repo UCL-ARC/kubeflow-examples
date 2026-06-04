@@ -11,7 +11,7 @@ This guide walks you through setting up a unified-ai environment for generative 
 Before starting, create a new Unified AI Notebook.
 Under **Data Volumes**, select `scratch-volume`, this is required for storing datasets, models, and outputs.
 
-## 1. Download openai/gpt-oss-20b
+## 1. Download `openai/gpt-oss-20b` model
 
 Navigate to your scratch volume and download the model.
 
@@ -50,7 +50,73 @@ hf download openai/gpt-oss-20b --local-dir gpt-oss-20b/ --max-workers 1
 ```
 </details>
 
-## 2. Deploy Services
+
+
+## 2. Create a custom image
+
+* Prerequisites.
+
+Set these variables once, they're reused in every command below:
+
+```bash
+IMAGENAME=unified-ai-kserve-vllm
+VERSION_ID=v0.0.2
+```
+
+* Build the Docker image.
+
+Run from the directory containing your `Dockerfile`:
+
+```bash
+docker build -t ${IMAGENAME}:${VERSION_ID} -f Dockerfile .
+```
+
+
+* Tag the image for GitHub Container Registry
+
+Replace `YOUR_GITHUB_ORG` and `YOUR_GITHUB_USERNAME_ID` with your own values:
+
+```bash
+GITHUB_ORG=YOUR_GITHUB_ORG        # or YOUR_GITHUB_USERNAME_ID
+PROJECT_NAME=kserve-vllm
+
+docker tag ${IMAGENAME}:${VERSION_ID} \
+  ghcr.io/${GITHUB_ORG}/${PROJECT_NAME}/${IMAGENAME}:${VERSION_ID}
+```
+
+
+Verify the tag was applied (`docker images`):
+
+```bash
+$ docker images
+REPOSITORY                                              TAG       IMAGE ID       CREATED         SIZE
+ghcr.io/mxochicale/kserve-vllm/unified-ai-kserve-vllm   v0.0.2    c4ab68f6e4f6   2 minutes ago   26.2GB
+unified-ai-kserve-vllm                                  v0.0.2    c4ab68f6e4f6   2 minutes ago   26.2GB
+```
+
+* Authenticate with a personal access token
+
+Create a [classic PAT](https://github.com/settings/tokens) with the `write:packages` scope, then log in:
+
+```bash
+GITHUB_USERNAME=YOUR_GITHUB_USERNAME_ID
+export CR_PAT=YOUR_PERSONAL_ACCESS_TOKEN
+
+echo ${CR_PAT} | docker login ghcr.io \
+  -u ${GITHUB_USERNAME} --password-stdin
+# Login Succeeded
+```
+
+* Push the image
+
+```bash
+docker push ghcr.io/${GITHUB_ORG}/${PROJECT_NAME}/${IMAGENAME}:${VERSION_ID}
+```
+
+**After pushing:** go to `https://github.com/orgs/${GITHUB_ORG}/packages`, open the package settings, and change visibility to **public**.
+
+
+## 3. Deploy Services
 
 Apply the serving runtime and inference service manifests.
 
@@ -70,13 +136,13 @@ kubectl get inferenceservice
 kubectl describe inferenceservice gpt-oss-20b
 ```
 
-## 3. Service Endpoint
+## 4. Service Endpoint
 
 The inference service is accessible at:
 http://gpt-oss-20b.kubeflow-${USERNAME}.svc.cluster.local
 
 
-## 4. Send Requests
+## 5. Send Requests
 
 A complete working example is available in [hello-world-gpt-oss-20b.ipynb](../../kserve-usecases/vllm/hello-world-gpt-oss-20b.ipynb).
 
@@ -120,7 +186,7 @@ print(response.json()["choices"][0]["message"]["content"])
 ```
 
 
-## 5. Inspect Services
+## 6. Inspect Services
 
 Common `kubectl` commands for inspecting the deployment:
 
