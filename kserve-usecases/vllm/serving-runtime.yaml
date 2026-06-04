@@ -5,7 +5,7 @@ metadata:
 spec:
   annotations:
     prometheus.kserve.io/path: /metrics
-    prometheus.kserve.io/port: "8080"
+    prometheus.kserve.io/port: "8000"
 
   containers:
   - env:
