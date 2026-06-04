@@ -21,7 +21,7 @@ spec:
       value: "/tmp"
     - name: VLLM_CONFIG_ROOT
       value: "/tmp"
-    image: ghcr.io/mxochicale/kserve-vllm/unified-ai-kserve-vllm:v0.0.1
+    image: ghcr.io/mxochicale/kserve-vllm/unified-ai-kserve-vllm:v0.0.2
     name: kserve-container
     command: [vllm, serve]
     ports:
