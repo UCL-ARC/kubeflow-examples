@@ -11,7 +11,7 @@ Under **Data Volumes**, select `scratch-volume`, this is required for storing da
 
 ## Download model and sample image
 ```bash
-mkdir -p mosaic && cd mosaic
+cd $HOME/scratch-volume && mkdir -p models/mosaic && cd models/mosaic
 wget -O mosaic-9.onnx https://huggingface.co/onnxmodelzoo/mosaic-9/resolve/main/mosaic-9.onnx
 wget https://raw.githubusercontent.com/pytorch/examples/main/fast_neural_style/images/content-images/amber.jpg
 ```
