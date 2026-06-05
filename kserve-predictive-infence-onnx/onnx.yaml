@@ -6,7 +6,7 @@ spec:
   predictor:
     model:
       args:
-        - "--model-store=/mnt/models/models/mosaic"
+        - "--model-store=/mnt/models/models/mosaic/mosaic-9.onnx"
       protocolVersion: v2
       modelFormat:
         name: onnx
