@@ -1,0 +1,20 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "style-sample"
+spec:
+  predictor:
+    model:
+      args:
+        - "--model-store=/mnt/models/models/mosaic"
+      protocolVersion: v2
+      modelFormat:
+        name: onnx
+      storageUri: "pvc://scratch-volume"
+      resources:
+        requests:
+          cpu: "1"
+          memory: "4Gi"
+        limits:
+          cpu: "4"
+          memory: "8Gi"
