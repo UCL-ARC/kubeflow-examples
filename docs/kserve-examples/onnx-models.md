@@ -33,4 +33,4 @@ Common `kubectl` commands for inspecting the deployment:
 | `kubectl describe inferenceservice style-sample` | Inspect the service |
 | `kubectl delete inferenceservice style-sample` | Remove the service |
 | `kubectl get pods` | List pods |
-| `kubectl describe pod gpt-oss-20b-predictor-00001-deployment` | Inspect a pod |
+| `kubectl describe pod style-sample-predictor-00001-deployment` | Inspect a pod |
