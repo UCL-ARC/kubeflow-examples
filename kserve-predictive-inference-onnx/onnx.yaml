@@ -1,6 +1,8 @@
 apiVersion: "serving.kserve.io/v1beta1"
 kind: "InferenceService"
 metadata:
+  annotations:
+    sidecar.istio.io/inject: "false"
   name: "style-sample"
 spec:
   predictor:
