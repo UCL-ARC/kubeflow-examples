@@ -7,16 +7,14 @@ metadata:
 spec:
   predictor:
     model:
-      args:
-        - "--model-store=/mnt/models/models/mosaic/mosaic-9.onnx"
       protocolVersion: v2
       modelFormat:
         name: onnx
-      storageUri: "pvc://scratch-volume"
+      storageUri: "pvc://scratch-volume/models/mosaic"
       resources:
         requests:
           cpu: "1"
-          memory: "4Gi"
+          memory: "512Mi"
         limits:
           cpu: "4"
-          memory: "8Gi"
+          memory: "1Gi"

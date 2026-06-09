@@ -27,6 +27,13 @@ hf download openai/gpt-oss-20b --local-dir gpt-oss-20b/ --max-workers 1 --revisi
 # Download complete: 100%, 41.3G/41.3G
 ```
 
+Reorganise model paths
+```bash
+mkdir -p ~/scratch-volume/models/mosaic/mosaic-9/1
+mv ~/scratch-volume/models/mosaic/mosaic-9.onnx \
+   ~/scratch-volume/models/mosaic/mosaic-9/1/model.onnx
+```
+
 
 <details>
 <summary>Expected directory structure after download</summary>
