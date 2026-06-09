@@ -16,7 +16,18 @@ wget -O mosaic-9.onnx https://huggingface.co/onnxmodelzoo/mosaic-9/resolve/main/
 wget https://raw.githubusercontent.com/pytorch/examples/main/fast_neural_style/images/content-images/amber.jpg
 ```
 
-Reorganise model paths
+* Path layout for models
+```bash
+<model-root>
+   mnist12/
+      1/
+         model.onnx
+   style/
+      1/
+         model.onnx
+```
+
+* Reorganise model paths
 ```bash
 mkdir -p ~/scratch-volume/models/mosaic/1
 mv ~/scratch-volume/models/mosaic/mosaic-9.onnx \
