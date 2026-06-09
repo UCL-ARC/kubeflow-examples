@@ -18,9 +18,9 @@ wget https://raw.githubusercontent.com/pytorch/examples/main/fast_neural_style/i
 
 Reorganise model paths
 ```bash
-mkdir -p ~/scratch-volume/models/mosaic/mosaic-9/1
+mkdir -p ~/scratch-volume/models/mosaic/1
 mv ~/scratch-volume/models/mosaic/mosaic-9.onnx \
-   ~/scratch-volume/models/mosaic/mosaic-9/1/model.onnx
+   ~/scratch-volume/models/mosaic/1/model.onnx
 ```
 
 ## Deploy Services
