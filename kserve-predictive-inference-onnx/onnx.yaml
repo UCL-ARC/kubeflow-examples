@@ -11,6 +11,10 @@ spec:
       modelFormat:
         name: onnx
       storageUri: "pvc://scratch-volume/models"
+      args:
+        - --model-store=/mnt/models/models
+        - --model-control-mode=explicit
+        - --load-model=mosaic
       resources:
         requests:
           cpu: "100m"
