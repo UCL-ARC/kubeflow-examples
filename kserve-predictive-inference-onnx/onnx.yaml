@@ -10,7 +10,7 @@ spec:
       protocolVersion: v2
       modelFormat:
         name: onnx
-      storageUri: "pvc://scratch-volume"
+      storageUri: "pvc://scratch-volume/models"
       resources:
         requests:
           cpu: "1"
