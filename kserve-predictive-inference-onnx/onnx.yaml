@@ -10,6 +10,7 @@ spec:
       protocolVersion: v2
       modelFormat:
         name: onnx
+      runtime: triton
       storageUri: "pvc://scratch-volume/models"
       resources:
         requests:
