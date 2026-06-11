@@ -10,7 +10,7 @@ spec:
       protocolVersion: v2
       modelFormat:
         name: onnx
-      storageUri: "pvc://scratch-volume/models"
+      storageUri: "pvc://scratch-volume"
       args:
         - --model-store=/mnt/models/models
         - --model-control-mode=explicit
