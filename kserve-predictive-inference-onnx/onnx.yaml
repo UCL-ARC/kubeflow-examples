@@ -13,8 +13,8 @@ spec:
       storageUri: "pvc://scratch-volume/models"
       resources:
         requests:
-          cpu: "1"
+          cpu: "100m"
           memory: "512Mi"
         limits:
-          cpu: "4"
+          cpu: "1"
           memory: "1Gi"
