@@ -1,0 +1,25 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  annotations:
+    sidecar.istio.io/inject: "false"
+  name: "style-sample"
+spec:
+  predictor:
+    model:
+      protocolVersion: v2
+      modelFormat:
+        name: onnx
+      storageUri: "pvc://scratch-volume"
+      runtime: kserve-tritonserver
+      args:
+        - --model-repository=/mnt/models/models
+        - --model-control-mode=explicit
+        - --load-model=mosaic
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "512Mi"
+        limits:
+          cpu: "1"
+          memory: "1Gi"

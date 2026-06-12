@@ -13,7 +13,7 @@ Under **Data Volumes**, select `scratch-volume`, this is required for storing da
 
 ## 1. Download `openai/gpt-oss-20b` model
 
-Navigate to your scratch volume and download the model using the `hf` CLI. 
+Navigate to your scratch volume and download the model using the `hf` CLI.
 Set `--local-dir` to the target download location and `--revision` to the commit hash of the required model version from the [huggingface.co/openai/gpt-oss-20b](https://huggingface.co/openai/gpt-oss-20b) repository.
 
 You may experience crashes due to concurrency issues; if so, use `--max-workers 1`.
@@ -124,7 +124,7 @@ Apply the serving runtime and inference service manifests.
 We recommend using `cd` to navigate to the configuration directory at `kserve-usecases/vllm/`, and `cd ..` to return to the root repository path.
 
 You need to apply `serving-runtime.yaml` first, followed by `inference-service.yaml`.
-Please note that the initial deployment may take some time, as the container image needs to be pulled onto the cluster. 
+Please note that the initial deployment may take some time, as the container image needs to be pulled onto the cluster.
 Subsequent deployments will typically be much faster, as the image will already be cached on the node.
 
 ```bash
