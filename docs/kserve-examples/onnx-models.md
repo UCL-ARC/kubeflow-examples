@@ -27,6 +27,7 @@ wget https://raw.githubusercontent.com/pytorch/examples/main/fast_neural_style/i
 ## Deploy Services
 change path to `kserve-predictive-inference-onnx`
 ```bash
+cd kserve-predictive-inference-onnx
 kubectl apply -f onnx.yaml
 ```
 
