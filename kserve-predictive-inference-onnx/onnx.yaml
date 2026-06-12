@@ -11,8 +11,9 @@ spec:
       modelFormat:
         name: onnx
       storageUri: "pvc://scratch-volume"
+      runtime: kserve-tritonserver
       args:
-        - --model-store=/mnt/models/models
+        - --model-repository=/mnt/models/models
         - --model-control-mode=explicit
         - --load-model=mosaic
       resources:
