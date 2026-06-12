@@ -13,6 +13,7 @@ Under **Data Volumes**, select `scratch-volume`, this is required for storing da
 ```bash
 cd $HOME/scratch-volume && mkdir -p models/mosaic/1 && cd models/mosaic/1 # file permissions drwxr-sr-x.
 wget -O model.onnx https://huggingface.co/onnxmodelzoo/mosaic-9/resolve/main/mosaic-9.onnx # file permissions -rw-r--r--.
+cd $HOME/scratch-volume/models/mosaic
 wget https://raw.githubusercontent.com/pytorch/examples/main/fast_neural_style/images/content-images/amber.jpg
 ```
 
@@ -28,7 +29,7 @@ wget https://raw.githubusercontent.com/pytorch/examples/main/fast_neural_style/i
 
 The [onnx.yaml](../../kserve-predictive-inference-onnx/onnx.yaml) is as follows
 
-```bash
+```yaml
 apiVersion: "serving.kserve.io/v1beta1"
 kind: "InferenceService"
 metadata:
@@ -66,7 +67,7 @@ kubectl apply -f onnx.yaml
 
 ## Run Inference Using Python
 
-All steps are in [mosaic-onnx.ipynb](../../kserve-predictive-inference-onnx/mosaic-onnx.ipynb) for explcity,
+All steps are in [mosaic-onnx.ipynb](../../kserve-predictive-inference-onnx/mosaic-onnx.ipynb) for reproducibility,
 
 
 ### Add imports
