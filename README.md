@@ -9,8 +9,12 @@ This section describes how to install dependencies and to build the documentatio
 ```bash
 # 1. Install uv (macOS and Linux)
 curl -LsSf https://astral.sh/uv/install.sh | sh
-# 2. Install dependencies and run mkdocs serve
+# 2. Create env
+uv venv --python 3.12
+source .venv/bin/activate
+# 3. Install dependencies and run mkdocs serve
 uv sync
+uv run mkdocs build --strict
 uv run mkdocs serve
 ```
 
