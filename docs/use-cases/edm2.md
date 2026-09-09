@@ -101,7 +101,7 @@ RESOURCES_PER_NODE = {
 * Setting up customised image
 
 ```bash
-GITHUB_CONTAINER_REGISTRY = "ghcr.io/xfetus/fetal-ultrasound-edm2/fetal-ultrasound-edm2-distributed-learning:v0.1.1"
+GITHUB_CONTAINER_REGISTRY = "ghcr.io/xfetus/fetal-ultrasound-edm2/fetal-ultrasound-edm2-distributed-learning:v0.1.41"
 ```
 
 * Setting up torchrun with all dependendencies in the customimsed image (see full notebook [here](https://github.com/xfetus/fetal-ultrasound-edm2/blob/main/unified-ai/training-edm2-model-ghcr.ipynb))
@@ -113,14 +113,14 @@ command = TrainerCommand(
         "torchrun",
         f"--nnodes={NUM_NODES}",
         "train_edm2.py", #path of script in scratch 
-        "--outdir /scratch-volume/FETAL_PLANES_DB/OUTPUT_DIRECTORY", # pragma: allowlist secret
-        "--data /scratch-volume/data-fetal-us-edm2/FETAL_PLANES_DB",
-        "--fpus23 /scratch-volume/data-fetal-us-edm2/FPUS23",
-        "--african /scratch-volume/data-fetal-us-edm2/AfricanDataset/Zenodo_dataset",
-        "--fetal-abdomen /scratch-volume/data-fetal-us-edm2/FetalAbdominalSegmentation/IMAGES",
-        "--batch 4",
-        "--preset edm2-img512-s",
-        "--batch-gpu 4",
+        "--outdir", "/scratch-volume/data-fetal-us-edm2/OUTPUT_DIRECTORY",
+        "--data", "/scratch-volume/data-fetal-us-edm2/FETAL_PLANES_DB",
+        "--fpus23", "/scratch-volume/data-fetal-us-edm2/FPUS23",
+        "--african", "/scratch-volume/data-fetal-us-edm2/AfricanDataset/Zenodo_dataset",
+        "--fetal-abdomen", "/scratch-volume/data-fetal-us-edm2/FetalAbdominalSegmentation/IMAGES",
+        "--batch", "4",
+        "--preset", "edm2-img512-s",
+        "--batch-gpu", "4",
     ]
 )
 
@@ -130,6 +130,8 @@ command = TrainerCommand(
 * Setting up torchrun with all dependendencies in the customimsed image using the scratch-volume (see full notebook [here](https://github.com/xfetus/fetal-ultrasound-edm2/blob/main/unified-ai/training-edm2-model-scratch-volume.ipynb))
 
 ```bash
+
+GITHUB_CONTAINER_REGISTRY = "ghcr.io/xfetus/fetal-ultrasound-edm2/fetal-ultrasound-edm2-distributed-learning:v0.0.11"
 
 command = TrainerCommand(
     command=[
