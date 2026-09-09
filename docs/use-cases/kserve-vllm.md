@@ -1,7 +1,7 @@
 ---
-title: KServe with gpt-oss-20b
+title: KServe - gpt-oss-20b
 description:
-weight: 2
+weight: 1
 ---
 
 This guide walks you through setting up a unified-ai environment for generative inference with the `gpt-oss-20b` model.
@@ -147,7 +147,7 @@ http://gpt-oss-20b.kubeflow-${USERNAME}.svc.cluster.local
 
 ## 5. Send Requests
 
-A complete working example is available in [hello-world-gpt-oss-20b.ipynb](../../kserve-usecases/vllm/hello-world-gpt-oss-20b.ipynb).
+A complete working example is available in [hello-world-gpt-oss-20b.ipynb](https://github.com/UCL-ARC/kubeflow-examples/blob/main/kserve-usecases/vllm/hello-world-gpt-oss-20b.ipynb).
 
 ### Get the inference service URL
 
